@@ -19,6 +19,12 @@
             <version>1.18.8</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>13-ea+14b</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 
 </project>

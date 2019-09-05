@@ -3,19 +3,23 @@
  *
  * @author wolke
  * @version 1.0, 19.08.2019
- *
  */
 
-public class Node <N extends Node, T extends Comparable<T>> {
+public class Node<N extends Node, T extends Comparable<T>> implements Comparable<Node> {
     protected N left; // left child
     protected N right; // right child
     protected T value; // integer value
 
-    Node(){};
+    Node() {
+    }
 
-    Node(T value){
+    ;
+
+    Node(T value) {
         this.value = value;
-    };
+    }
+
+    ;
 
     public N getLeft() {
         return left;
@@ -41,7 +45,11 @@ public class Node <N extends Node, T extends Comparable<T>> {
         this.value = value;
     }
 
-    public  String toString(){
+    public String toString() {
         return value.toString();
-    };
+    }
+
+    public int compareTo(Node other) {
+        return 0;
+    }
 }
