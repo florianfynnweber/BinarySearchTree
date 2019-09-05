@@ -2,6 +2,7 @@ import java.util.List;
 
 public class BinarySearchTree implements InterfaceBinarySearchTree {
     Node<Node, Integer> root;
+    List orderd;
     BinarySearchTree(){
         root = null;
     }
@@ -88,8 +89,8 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         tree.root.setRight(new Node<Node, Integer>(20));
         tree.root.getRight().setRight(new Node<Node, Integer>(25));
         System.out.println(tree.root.getLeft().getValue());
-        tree.traverse(Order.PREORDER);
+        //tree.traverse(Order.PREORDER);
         tree.traverse(Order.INORDER);
-        tree.traverse(Order.POSTORDER);
+        //tree.traverse(Order.POSTORDER);
     }
 }

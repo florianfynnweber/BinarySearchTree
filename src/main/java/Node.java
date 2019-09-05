@@ -60,5 +60,4 @@ public class Node<N extends Node, T extends Comparable<T>> implements Comparable
         Node<Node, T> other = (Node<Node, T>) o;
         return getValue().compareTo(other.getValue());
     }
-
 }
