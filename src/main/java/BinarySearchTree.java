@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarOutputStream;
@@ -16,14 +17,20 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be add
      */
     public void addValue(Comparable value) throws BinarySearchTreeException {
-        Node<Node, Integer> newNode = new Node<Node, Integer>((Integer) value);
-        if (newNode.getValue() < root.getValue()) {
-            root.getLeft();
-        } else if (newNode.getValue() > root.getValue()) {
-            root.getRight();
-        } else {
-            throw new BinarySearchTreeException("sth went wrong");
+        insertRec(root, value);
+    }
+    public Node insertRec(Node root, Comparable value){
+        if (root == null) {
+            root = new Node(value);
+            return root;
         }
+        /* Otherwise, recur down the tree */
+        if ((int)value < (int)root.getValue())
+            root.setLeft(insertRec(root.left, (int)value));
+        else if ((int) value > (int)root.getValue())
+            root.right = insertRec(root.right, (int) value);
+        /* return the (unchanged) node pointer */
+        return root;
     }
 
 
@@ -129,14 +136,15 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
     public static void main(String[] args) throws BinarySearchTreeException {
         BinarySearchTree tree = new BinarySearchTree();
         tree.root = new Node<Node, Integer>(10);
-        tree.root.setLeft(new Node<Node, Integer>(5));
-        tree.root.setRight(new Node<Node, Integer>(20));
-        tree.root.getRight().setRight(new Node<Node, Integer>(25));
-        //tree.traverse(Order.PREORDER);
+        tree.addValue(5);
+        tree.addValue(20);
+        tree.addValue(25);
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.hasValue(5));
+        tree.addValue(3);
         //tree.traverse(Order.POSTORDER);
         tree.addValue(1);
+        System.out.println(tree.traverse(Order.INORDER));
     }
 }
 
