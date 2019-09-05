@@ -5,7 +5,7 @@
  * @version 1.0, 19.08.2019
  */
 
-public class Node<N extends Node, T extends Comparable<T>> implements Comparable{
+public class Node<N extends Node, T extends Comparable<T>> implements Comparable {
     protected N left; // left child
     protected N right; // right child
     protected T value; // integer value
@@ -13,20 +13,19 @@ public class Node<N extends Node, T extends Comparable<T>> implements Comparable
     Node() {
     }
 
-    ;
-
     Node(T value) {
         this.value = value;
     }
 
-    ;
-
     public N getLeft() {
         return left;
     }
+
     /**
      * Set the left Node
-     * @param left Node obj*/
+     *
+     * @param left Node obj
+     */
     public void setLeft(N left) {
         this.left = left;
     }
@@ -37,7 +36,9 @@ public class Node<N extends Node, T extends Comparable<T>> implements Comparable
 
     /**
      * Set the right Node
-     * @param right Node obj*/
+     *
+     * @param right Node obj
+     */
     public void setRight(N right) {
         this.right = right;
     }
@@ -56,11 +57,8 @@ public class Node<N extends Node, T extends Comparable<T>> implements Comparable
 
     @Override
     public int compareTo(Object o) {
-        Node other = (Node) o;/**
-         return this.getValue().compareTo(other.getValue());**/
-        if ((int)getValue() < (int)other.getValue()) return -1;
-        if ((int)getValue() > (int)other.getValue()) return 1;
-        return 0;
+        Node<Node, T> other = (Node<Node, T>) o;
+        return getValue().compareTo(other.getValue());
     }
 
 }
