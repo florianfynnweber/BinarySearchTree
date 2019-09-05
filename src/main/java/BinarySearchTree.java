@@ -9,13 +9,21 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * Add a Node to the tree
      * @param value The Node obj that should be add*/
     public void addValue(Comparable value) throws BinarySearchTreeException {
+        if (value==null){
+            throw new BinarySearchTreeException("value == null");
+        }else{
 
+        }
     }
     /**
      * Delete a Node to the tree
      * @param value The Node obj that should be delete*/
     public void delValue(Comparable value) throws BinarySearchTreeException {
+        if (value==null){
+            throw new BinarySearchTreeException("value == null");
+        }else{
 
+        }
     }
     /**
      * Search for a node
