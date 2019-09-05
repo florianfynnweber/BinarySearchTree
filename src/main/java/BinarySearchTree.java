@@ -1,7 +1,5 @@
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarOutputStream;
 
 public class BinarySearchTree implements InterfaceBinarySearchTree {
     Node<Node, Integer> root;
@@ -17,7 +15,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be add
      */
     public void addValue(Comparable value) throws BinarySearchTreeException {
-        insertRec(root, value);
+       insertRec(root, value);
     }
     public Node insertRec(Node root, Comparable value){
         if (root == null) {
@@ -40,18 +38,57 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be delete
      */
     public void delValue(Comparable value) throws BinarySearchTreeException {
-        if (value == null) {
-            return;
-        }
+        root = delete(root, (int)value);
 
     }
 
+    public Node delete(Node tmp, int key){
+
+        if (tmp == null)  return tmp;
+
+        /* Otherwise, recur down the tree */
+        if (key < (int)tmp.getValue())
+            tmp.setLeft(delete(tmp.getLeft(), key));
+        else if (key > (int)tmp.getValue())
+            tmp.setRight(delete(tmp.getRight(), key));
+
+            // if key is same as tmp's key, then This is the node
+            // to be deleted
+        else
+        {
+            // node with only one child or no child
+            if (tmp.getLeft() == null)
+                return tmp.getRight();
+            else if (tmp.getRight() == null)
+                return tmp.getLeft();
+
+            // node with two children: Get the inorder successor (smallest
+            // in the right subtree)
+            tmp.setValue(minValue(tmp.getRight()));
+
+            // Delete the inorder successor
+            tmp.setRight(delete(tmp.right, (int)tmp.getValue()));
+        }
+
+        return tmp;
+    }
+    public int minValue(Node tmp)
+    {
+        int minv = (int)tmp.getValue();
+        while (tmp.getLeft() != null)
+        {
+            minv = (int)tmp.left.getValue();
+            tmp = tmp.getLeft();
+        }
+        return minv;
+    }
     /**
      * Search for a node
      *
      * @param value The Node obj that should be searched
      */
     public boolean hasValue(Comparable value) {
+        // check if value exist in search
         if (search(root, (int)value) != null){
             return true;
         }else{
@@ -59,19 +96,22 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         }
     }
 
-    // A utility function to search a given key in BST
-    public Node search(Node root, int key)
+    /**
+     * Search recursive in tree
+     * @param key integer
+     * @param tmp current root*/
+    public Node search(Node tmp, int key)
     {
-        // Base Cases: root is null or key is present at root
-        if (root==null || (int)root.getValue()==key)
-            return root;
+        // root is null or key is present at root
+        if (tmp==null || (int)tmp.getValue()==key)
+            return tmp;
 
         // val is greater than root's key
-        if ((int)root.getValue() > key)
-            return search(root.getLeft(), key);
+        if ((int)tmp.getValue() > key)
+            return search(tmp.getLeft(), key);
 
         // val is less than root's key
-        return search(root.getRight(), key);
+        return search(tmp.getRight(), key);
     }
 
 
@@ -144,107 +184,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         tree.addValue(3);
         //tree.traverse(Order.POSTORDER);
         tree.addValue(1);
+        tree.delValue(23);
         System.out.println(tree.traverse(Order.INORDER));
     }
 }
-
-
-//*
-// import java.util.List;
-//import java.util.jar.JarOutputStream;
-//
-//public class BinarySearchTree implements InterfaceBinarySearchTree {
-//    BNode<Integer> root;
-//    List orderd;
-//    BinarySearchTree(){
-//        root = null;
-//    }
-//    /**
-//     * Add a Node to the tree
-//     * @param value The Node obj that should be add*/
-//    public void addValue(Comparable value) throws BinarySearchTreeException {
-//        if (value==null) {
-//            return;
-//        }
-//
-//    }
-//    /**
-//     * Delete a Node to the tree
-//     * @param value The Node obj that should be delete*/
-//    public void delValue(Comparable value) throws BinarySearchTreeException {
-//        if (value==null){
-//            return;
-//        }
-//
-//    }
-//    /**
-//     * Search for a node
-//     * @param value The Node obj that should be searched*/
-//    public boolean hasValue(Comparable value) {
-//        return false;
-//    }
-//    /**
-//     * Return depth of tree
-//     * @return depth of tree */
-//    public Integer getDepth() {
-//        return null;
-//    }
-//    /**
-//     * Order the tree sort with one order method
-//     * @param o Which oder type should be used (Enum)
-//     * @return ordered List of tree*/
-//    public List traverse(Order o) {
-//
-//        switch (o){
-//            case INORDER:
-//                printInorder(root);
-//                return null;
-//            case PREORDER:
-//                printPreorder(root);
-//                return null;
-//            case POSTORDER:
-//                printPostorder(root);
-//                return null;
-//            case LEVELORDER:
-//                return null;
-//        }
-//        return null;
-//    }
-//    public void printInorder(BNode node){
-//        if (node == null)
-//            return;
-//        printInorder(node.getLeft());
-//        System.out.print(node.getValue() + " ");
-//        printInorder(node.getRight());
-//    }
-//
-//    public void printPostorder(BNode node)
-//    {
-//        if (node == null)
-//            return;
-//        printInorder(node.getLeft());
-//        printInorder(node.getRight());
-//        System.out.print(node.getValue() + " ");
-//    }
-//    public void printPreorder(BNode node)
-//    {
-//        if (node == null)
-//            return;
-//        System.out.print(node.getValue() + " ");
-//        printPreorder(node.getLeft());
-//        printPreorder(node.getRight());
-//    }
-//
-//    public static void main(String[] args) throws BinarySearchTreeException {
-//        BinarySearchTree tree = new BinarySearchTree();
-//        tree.root = new BNode<Integer>(10);
-//        System.out.println(tree.root.getValue());
-//        tree.root.setLeft(new BNode<Integer>(5));
-//        tree.root.setRight(new BNode<Integer>(20));
-//        tree.root.getRight().setRight(new BNode<Integer>(25));
-//        System.out.println(tree.root.getLeft().getValue());
-//        //tree.traverse(Order.PREORDER);
-//        tree.traverse(Order.INORDER);
-//        //tree.traverse(Order.POSTORDER);
-//    }
-//}*/
