@@ -5,7 +5,7 @@
  * @version 1.0, 19.08.2019
  */
 
-public class Node<N extends Node, T extends Comparable<T>> implements Comparable {
+public class Node<N extends Node, T extends Comparable<T>> implements Comparable<Node> {
     protected N left; // left child
     protected N right; // right child
     protected T value; // integer value
@@ -49,7 +49,11 @@ public class Node<N extends Node, T extends Comparable<T>> implements Comparable
         return value.toString();
     }
 
-    public int compareTo(Object o) {
+    @Override
+    public int compareTo(Node other) {
+        /**if ((int) other.getValue() > (int)this.getValue()){
+            return 1;
+        }*/
         return 0;
     }
 }
