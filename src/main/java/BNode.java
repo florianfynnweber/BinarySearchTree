@@ -7,7 +7,7 @@
  */
 
 
-public class BNode<T extends Comparable<T>> extends AbstractNode {
+public class BNode<T extends Comparable<T>> extends AbstractNode<T> implements Comparable{
     private BNode left = null;
     private BNode right = null;
 
@@ -33,4 +33,9 @@ public class BNode<T extends Comparable<T>> extends AbstractNode {
         this.right = right;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        BNode<T> other = (BNode<T>) o;
+        return getValue().compareTo(other.getValue());
+    }
 }
