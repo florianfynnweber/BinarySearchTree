@@ -42,6 +42,8 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
                 return null;
             case POSTORDER:
                 return null;
+            case LEVELORDER:
+                return null;
         }
         return null;
     }
