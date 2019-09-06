@@ -183,6 +183,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         tree.addValue(25);
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.hasValue(5));
+        System.out.println(tree.hasValue(1000000));
         tree.addValue(3);
         tree.traverse(Order.POSTORDER);
         tree.addValue(1);
