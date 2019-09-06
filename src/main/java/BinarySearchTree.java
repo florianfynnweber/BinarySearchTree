@@ -1,18 +1,7 @@
 
-import guru.nidi.graphviz.attribute.Color;
-import guru.nidi.graphviz.attribute.RankDir;
-import guru.nidi.graphviz.attribute.Style;
-import guru.nidi.graphviz.engine.Format;
-import guru.nidi.graphviz.engine.Graphviz;
-import guru.nidi.graphviz.model.Graph;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static guru.nidi.graphviz.model.Factory.graph;
-import static guru.nidi.graphviz.model.Factory.node;
 
 public class BinarySearchTree implements InterfaceBinarySearchTree {
     Node<Node, Integer> root;
@@ -195,23 +184,11 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.hasValue(5));
         tree.addValue(3);
-        //tree.traverse(Order.POSTORDER);
+        tree.traverse(Order.POSTORDER);
         tree.addValue(1);
         tree.delValue(23);
         System.out.println(tree.traverse(Order.INORDER));
-        tree.to_graphiz();
     }
 
-    public void to_graphiz() throws IOException {
-        Graph g = graph("example1").directed()
-                .graphAttr().with(RankDir.LEFT_TO_RIGHT)
-                .with(
-                        node("a").with(Color.RED).link(node("b")),
-                        node("b").link((node("c")).with(Style.DASHED))
-                );
-        Graphviz.fromGraph(g).height(100).render(Format.PNG).toFile(new File("example/ex1.png"));
-
-
-    }
 
 }
