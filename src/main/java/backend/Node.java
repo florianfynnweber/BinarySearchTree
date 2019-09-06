@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Interface fuer Binary Search Tree Node
  *

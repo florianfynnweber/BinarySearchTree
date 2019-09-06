@@ -1,4 +1,4 @@
-/**
+package backend; /**
  * Red Black Binary Tree Node with left and right child
  * and color
  *
@@ -6,7 +6,7 @@
  * @version 1.1, 19.08.2019
  */
 
-import java.awt.Color;
+import java.awt.*;
 
 
 public class RBNode<T extends Comparable<T>> extends AbstractNode<T> implements Comparable {
