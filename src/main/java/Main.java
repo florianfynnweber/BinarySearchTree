@@ -14,7 +14,7 @@ public class Main extends Application {
         // load fxml
         Parent root = FXMLLoader.load(getClass().getResource("frontend/Gui.fxml"));
         // set tilte of the windwo
-        primaryStage.setTitle("BBinary search tree");
+        primaryStage.setTitle("Binary search tree");
         // create new scene
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

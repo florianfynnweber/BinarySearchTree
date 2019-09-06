@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import static guru.nidi.graphviz.model.Factory.*;
 
-public class Main extends Application {
+public class SimonMain extends Application {
 
     static BufferedImage gr;
 

@@ -8,7 +8,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
     Node<Node, Integer> root;
     ArrayList ordered;
 
-    BinarySearchTree() {
+    public BinarySearchTree() {
         root = null;
     }
 
