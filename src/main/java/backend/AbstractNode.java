@@ -1,3 +1,5 @@
+package backend;
+
 /**
  * Astract class for a node
  * Takes any comparable as Value

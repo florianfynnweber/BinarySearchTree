@@ -1,3 +1,6 @@
+package backend;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,7 +8,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
     Node<Node, Integer> root;
     ArrayList ordered;
 
-    BinarySearchTree() {
+    public BinarySearchTree() {
         root = null;
     }
 
@@ -173,7 +176,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
-    public static void main(String[] args) throws BinarySearchTreeException {
+    public static void main(String[] args) throws BinarySearchTreeException, IOException {
         BinarySearchTree tree = new BinarySearchTree();
         tree.root = new Node<Node, Integer>(10);
         tree.addValue(5);
@@ -181,10 +184,13 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         tree.addValue(25);
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.hasValue(5));
+        System.out.println(tree.hasValue(1000000));
         tree.addValue(3);
-        //tree.traverse(Order.POSTORDER);
+        tree.traverse(Order.POSTORDER);
         tree.addValue(1);
         tree.delValue(23);
         System.out.println(tree.traverse(Order.INORDER));
     }
+
+
 }
