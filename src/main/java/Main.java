@@ -29,12 +29,13 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("frontend/RootLayout.fxml"));
+            loader.setLocation(getClass().getResource("frontend/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             scene.getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
+            //scene.getStylesheets().add(String.valueOf(getClass().getResource("css/style.css")));
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

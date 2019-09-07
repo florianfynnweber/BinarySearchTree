@@ -53,6 +53,7 @@ public class BinarySearchTreeController implements Initializable {
                 System.out.println("hi");
                 tree.addValue(textFIn.getText());
                 System.out.println(tree.traverse(Order.INORDER));
+                textFIn.setText("");
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
             }
