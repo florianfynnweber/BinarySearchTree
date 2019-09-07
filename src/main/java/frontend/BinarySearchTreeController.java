@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -37,6 +38,7 @@ public class BinarySearchTreeController implements Initializable {
     @FXML
     public Label transverseResult;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         transverseBox.setItems(FXCollections.observableList(Arrays.asList(Order.values())));
@@ -51,6 +53,7 @@ public class BinarySearchTreeController implements Initializable {
                 System.out.println("hi");
                 tree.addValue(textFIn.getText());
                 System.out.println(tree.traverse(Order.INORDER));
+                textFIn.setText("");
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
             }

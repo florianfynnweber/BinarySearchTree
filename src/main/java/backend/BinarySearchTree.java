@@ -18,7 +18,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be add
      */
     public void addValue(Comparable value) throws BinarySearchTreeException {
-       insertRec(root, value);
+       root = insertRec(root, value);
     }
     public Node insertRec(Node root, Comparable value){
         if (root == null) {
