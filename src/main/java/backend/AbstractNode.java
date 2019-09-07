@@ -10,6 +10,7 @@ package backend;
 
 public abstract class AbstractNode<T extends Comparable<T>> {
     protected T value; // integer value
+
     AbstractNode(){};
 
     AbstractNode(T value){

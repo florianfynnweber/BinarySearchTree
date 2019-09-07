@@ -4,25 +4,24 @@ package backend; /**
  *
  * @author wolke
  * @version 1.1, 19.08.2019
+ *
  */
 
-import java.awt.*;
+import java.awt.Color;
 
 
-public class RBNode<T extends Comparable<T>> extends AbstractNode<T> implements Comparable {
+public class RBNode<T extends Comparable<T>> extends AbstractNode implements Comparable{
     private RBNode left = null;
     private RBNode right = null;
     private Color color = Color.RED;
 
-    RBNode() {
+    RBNode(){
         super();
     }
 
-    RBNode(T value) {
+    RBNode(T value){
         value = value;
-    }
-
-    ;
+    };
 
     public RBNode getLeft() {
         return left;
@@ -40,11 +39,11 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode<T> implements 
         this.right = right;
     }
 
-    public void setColor(Color color) {
+    public void setColor(Color color){
         this.color = color;
     }
 
-    public Color getColor() {
+    public Color getColor(){
         return this.color;
     }
 

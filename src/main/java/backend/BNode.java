@@ -9,23 +9,23 @@ package backend;
  */
 
 
-public class BNode<T extends Comparable<T>> extends AbstractNode<T> implements Comparable{
+public class BNode<T extends Comparable<T>> extends AbstractNode implements Comparable{
     private BNode left = null;
     private BNode right = null;
 
     BNode(){ super();};
 
     BNode(T value){
-        value = value;
-    };
+            value = value;
+        };
 
     public BNode getLeft() {
-        return left;
-    }
+            return left;
+        }
 
     public void setLeft(BNode left) {
-        this.left = left;
-    }
+            this.left = left;
+        }
 
     public BNode getRight() {
         return right;
@@ -34,6 +34,7 @@ public class BNode<T extends Comparable<T>> extends AbstractNode<T> implements C
     public void setRight(BNode right) {
         this.right = right;
     }
+
 
     @Override
     public int compareTo(Object o) {
