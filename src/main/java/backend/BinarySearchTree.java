@@ -18,20 +18,22 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be add
      */
     public void addValue(Comparable value) throws BinarySearchTreeException {
-       root = insertRec(root, value);
+        root = insertRec(root, value);
     }
-    public Node insertRec(Node root, Comparable value){
-        if (root == null) {
-            root = new Node(value);
-            return root;
+
+    public Node insertRec(Node tmp, Comparable value) {
+        if (tmp == null) {
+            tmp = new Node(value);
+            return tmp;
+        } else {
+            /* Otherwise, recur down the tree */
+            if ((int) value < (int) tmp.getValue())
+                tmp.setLeft(insertRec(tmp.getLeft(), (int) value));
+            else if ((int) value > (int) tmp.getValue())
+                tmp.setRight(insertRec(tmp.getRight(), (int) value));
+            /* return the (unchanged) node pointer */
+            return tmp;
         }
-        /* Otherwise, recur down the tree */
-        if ((int)value < (int)root.getValue())
-            root.setLeft(insertRec(root.left, (int)value));
-        else if ((int) value > (int)root.getValue())
-            root.right = insertRec(root.right, (int) value);
-        /* return the (unchanged) node pointer */
-        return root;
     }
 
 
@@ -41,24 +43,23 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be delete
      */
     public void delValue(Comparable value) throws BinarySearchTreeException {
-        root = delete(root, (int)value);
+        root = delete(root, (int) value);
 
     }
 
-    public Node delete(Node tmp, int key){
+    public Node delete(Node tmp, int key) {
 
-        if (tmp == null)  return tmp;
+        if (tmp == null) return tmp;
 
         /* Otherwise, recur down the tree */
-        if (key < (int)tmp.getValue())
+        if (key < (int) tmp.getValue())
             tmp.setLeft(delete(tmp.getLeft(), key));
-        else if (key > (int)tmp.getValue())
+        else if (key > (int) tmp.getValue())
             tmp.setRight(delete(tmp.getRight(), key));
 
             // if key is same as tmp's key, then This is the node
             // to be deleted
-        else
-        {
+        else {
             // node with only one child or no child
             if (tmp.getLeft() == null)
                 return tmp.getRight();
@@ -70,21 +71,21 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
             tmp.setValue(minValue(tmp.getRight()));
 
             // Delete the inorder successor
-            tmp.setRight(delete(tmp.right, (int)tmp.getValue()));
+            tmp.setRight(delete(tmp.getRight(), (int) tmp.getValue()));
         }
 
         return tmp;
     }
-    public int minValue(Node tmp)
-    {
-        int minv = (int)tmp.getValue();
-        while (tmp.getLeft() != null)
-        {
-            minv = (int)tmp.left.getValue();
+
+    public int minValue(Node tmp) {
+        int minv = (int) tmp.getValue();
+        while (tmp.getLeft() != null) {
+            minv = (int) tmp.getLeft().getValue();
             tmp = tmp.getLeft();
         }
         return minv;
     }
+
     /**
      * Search for a node
      *
@@ -92,25 +93,26 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      */
     public boolean hasValue(Comparable value) {
         // check if value exist in search
-        if (search(root, (int)value) != null){
+        if (search(root, (int) value) != null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Search recursive in tree
+     *
      * @param key integer
-     * @param tmp current root*/
-    public Node search(Node tmp, int key)
-    {
+     * @param tmp current root
+     */
+    public Node search(Node tmp, int key) {
         // root is null or key is present at root
-        if (tmp==null || (int)tmp.getValue()==key)
+        if (tmp == null || (int) tmp.getValue() == key)
             return tmp;
 
         // val is greater than root's key
-        if ((int)tmp.getValue() > key)
+        if ((int) tmp.getValue() > key)
             return search(tmp.getLeft(), key);
 
         // val is less than root's key
@@ -134,7 +136,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @return ordered List of tree
      */
     public List traverse(Order o) {
-        ordered  = new ArrayList();
+        ordered = new ArrayList();
         switch (o) {
             case INORDER:
                 getInorder(root);
