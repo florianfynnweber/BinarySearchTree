@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -36,6 +37,7 @@ public class BinarySearchTreeController implements Initializable {
     public ComboBox transverseBox;
     @FXML
     public Label transverseResult;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
