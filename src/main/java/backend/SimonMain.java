@@ -27,8 +27,9 @@ public class SimonMain extends Application {
         Graph g = graph("example1").directed()
                 .graphAttr().with(RankDir.LEFT_TO_RIGHT)
                 .with(
-                        node("a").with(Color.RED).link(node("b")),
-                        node("b").link(to(node("c")).with(Style.DASHED))
+                        node("a").with(Color.RED).link(node("b")).link(node("er")),
+                        node("b").link(to(node("c")).with(Style.DASHED)),
+                        node("er").with(Color.GREEN)
                 );
         gr = Graphviz.fromGraph(g).render(Format.SVG).toImage();
         launch(args);
