@@ -189,27 +189,13 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
-    public static void main(String[] args) throws BinarySearchTreeException, IOException {
-        BinarySearchTree tree = new BinarySearchTree();
-        tree.root = new BNode<Integer>(10);
-        tree.addValue(5);
-        tree.addValue(20);
-        tree.addValue(25);
-        System.out.println(tree.traverse(Order.INORDER));
-        System.out.println(tree.hasValue(5));
-        System.out.println(tree.hasValue(1000000));
-        tree.addValue(3);
-        tree.traverse(Order.POSTORDER);
-        tree.addValue(1);
-        tree.delValue(23);
-        System.out.println(tree.traverse(Order.INORDER));
+    public void toGraphiz() throws IOException {
         guru.nidi.graphviz.model.Node main = node("main").with(Label.html("<b>main</b><br/>start"), Color.rgb("1020d0").font());
         guru.nidi.graphviz.model.Node init = node(Label.markdown("**_init_**"));
         guru.nidi.graphviz.model.Node execute = node("execute");
         guru.nidi.graphviz.model.Node compare = node("compare").with(Shape.RECTANGLE, Style.FILLED, Color.hsv(.7, .3, 1.0));
         guru.nidi.graphviz.model.Node mkString = node("mkString").with(Label.lines(LEFT, "make", "a", "multi-line"));
         guru.nidi.graphviz.model.Node printf = node("printf");
-
         Graph g = graph("example2").directed().with(
                 ((guru.nidi.graphviz.model.Node) main).link(
                         to(node("parse").link(execute)).with(LinkAttr.weight(8)),
@@ -220,8 +206,25 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
                         graph().with(mkString, printf),
                         to(compare).with(Color.RED)),
                 init.link(mkString));
-
         Graphviz.fromGraph(g).width(900).render(Format.PNG).toFile(new File("example/ex2.png"));
+    }
+
+    public static void main(String[] args) throws BinarySearchTreeException, IOException {
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.root = new BNode<Integer>(10);
+        tree.addValue(5);
+        tree.addValue(20);
+        tree.addValue(25);
+        System.out.println(tree.traverse(Order.INORDER));
+        System.out.println(tree.hasValue(5));
+        System.out.println(tree.hasValue(1000000));
+        tree.addValue(3);
+        System.out.println(tree.traverse(Order.POSTORDER));
+        tree.addValue(1);
+        tree.delValue(23);
+        System.out.println(tree.traverse(Order.INORDER));
+        System.out.println(tree.traverse(Order.POSTORDER));
+        System.out.println(tree.traverse(Order.PREORDER));
     }
 
 
