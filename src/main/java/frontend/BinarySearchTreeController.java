@@ -53,7 +53,7 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnAdd.setOnAction(e ->{
             try {
-                tree.addValue(textFIn.getText());
+                tree.addValue(Integer.parseInt(textFIn.getText()));
                 System.out.println(tree.traverse(Order.INORDER));
                 textFIn.setText("");
             } catch (BinarySearchTreeException ex) {
@@ -63,13 +63,13 @@ public class BinarySearchTreeController implements Initializable {
         btnDelete.setOnAction(e ->{
             try {
 
-                tree.delValue(textFIn.getText());
+                tree.delValue(Integer.parseInt(textFIn.getText()));
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
             }
         });
         btnSearch.setOnAction(e -> {
-            tree.hasValue(textFIn.getText());
+            tree.hasValue(Integer.parseInt(textFIn.getText()));
 
         });
         try {
