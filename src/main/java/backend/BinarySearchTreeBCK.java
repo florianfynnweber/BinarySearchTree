@@ -28,9 +28,9 @@ public class BinarySearchTreeBCK implements InterfaceBinarySearchTree {
         } else {
             /* Otherwise, recur down the tree */
             if ((int) value < (int) tmp.getValue())
-                tmp.setLeft(insertRec(tmp.getLeft(), (int) value));
+                tmp.setLeft(insertRec(tmp.getLeft(), value));
             else if ((int) value > (int) tmp.getValue())
-                tmp.setRight(insertRec(tmp.getRight(), (int) value));
+                tmp.setRight(insertRec(tmp.getRight(), value));
             /* return the (unchanged) node pointer */
             return tmp;
         }
@@ -93,11 +93,7 @@ public class BinarySearchTreeBCK implements InterfaceBinarySearchTree {
      */
     public boolean hasValue(Comparable value) {
         // check if value exist in search
-        if (search(root, (int) value) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return search(root, (int) value) != null;
     }
 
     /**

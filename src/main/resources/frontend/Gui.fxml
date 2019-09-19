@@ -15,11 +15,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="264.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="107.0">
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </ImageView>
+                   <ImageView fx:id="imageView" fitHeight="171.0" fitWidth="281.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="153.0">
+                       <image>
+                           <Image url="@../../../../../../../../Bilder/3431596-rick+and+morty+featured+image.jpg" />
+                       </image></ImageView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

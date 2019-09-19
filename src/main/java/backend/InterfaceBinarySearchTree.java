@@ -20,7 +20,7 @@ public interface InterfaceBinarySearchTree<T extends Comparable<T>> {
      * @throws BinarySearchTreeException
      *             should usually not occur
      */
-    public abstract void addValue(T value)
+    void addValue(T value)
             throws BinarySearchTreeException;
 
     /**
@@ -29,7 +29,7 @@ public interface InterfaceBinarySearchTree<T extends Comparable<T>> {
      * @throws BinarySearchTreeException
      *             If the value is not in the tree.
      */
-    public abstract void delValue(T value)
+    void delValue(T value)
             throws BinarySearchTreeException;
 
     /**
@@ -37,12 +37,12 @@ public interface InterfaceBinarySearchTree<T extends Comparable<T>> {
      *            The value we are searching
      * @return True or False(we couldn't find it)
      */
-    public abstract boolean hasValue(T value);
+    boolean hasValue(T value);
 
     /**
      * @return height of the tree
      */
-    public default Integer getDepth() {
+    default Integer getDepth() {
         return null;
     }
 
@@ -50,7 +50,7 @@ public interface InterfaceBinarySearchTree<T extends Comparable<T>> {
      * @return list with all values in correct order
      * LEVELORDER not NECCESARY
      */
-    public default List<T> traverse(Order o) {
+    default List<T> traverse(Order o) {
         return null;
     }
 

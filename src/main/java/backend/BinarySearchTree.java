@@ -1,19 +1,17 @@
 package backend;
 
-import guru.nidi.graphviz.attribute.*;
-import guru.nidi.graphviz.engine.Format;
-import guru.nidi.graphviz.engine.Graphviz;
+import guru.nidi.graphviz.attribute.Color;
+import guru.nidi.graphviz.attribute.RankDir;
+import guru.nidi.graphviz.attribute.Style;
+import guru.nidi.graphviz.model.Factory;
 import guru.nidi.graphviz.model.Graph;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static guru.nidi.graphviz.attribute.Label.Justification.LEFT;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
-import static guru.nidi.graphviz.model.Link.to;
 
 public class BinarySearchTree implements InterfaceBinarySearchTree {
     BNode root;
@@ -39,9 +37,9 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         } else {
             /* Otherwise, recur down the tree */
             if ((int) value < (int) tmp.getValue())
-                tmp.setLeft(insertRec(tmp.getLeft(), (int) value));
+                tmp.setLeft(insertRec(tmp.getLeft(), value));
             else if ((int) value > (int) tmp.getValue())
-                tmp.setRight(insertRec(tmp.getRight(), (int) value));
+                tmp.setRight(insertRec(tmp.getRight(), value));
             /* return the (unchanged) node pointer */
             return tmp;
         }
@@ -104,11 +102,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      */
     public boolean hasValue(Comparable value) {
         // check if value exist in search
-        if (search(root, (int) value) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return search(root, (int) value) != null;
     }
 
     /**
@@ -189,24 +183,15 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
-    public void toGraphiz() throws IOException {
-        guru.nidi.graphviz.model.Node main = node("main").with(Label.html("<b>main</b><br/>start"), Color.rgb("1020d0").font());
-        guru.nidi.graphviz.model.Node init = node(Label.markdown("**_init_**"));
-        guru.nidi.graphviz.model.Node execute = node("execute");
-        guru.nidi.graphviz.model.Node compare = node("compare").with(Shape.RECTANGLE, Style.FILLED, Color.hsv(.7, .3, 1.0));
-        guru.nidi.graphviz.model.Node mkString = node("mkString").with(Label.lines(LEFT, "make", "a", "multi-line"));
-        guru.nidi.graphviz.model.Node printf = node("printf");
-        Graph g = graph("example2").directed().with(
-                ((guru.nidi.graphviz.model.Node) main).link(
-                        to(node("parse").link(execute)).with(LinkAttr.weight(8)),
-                        to(init).with(Style.DOTTED),
-                        node("cleanup"),
-                        to(printf).with(Style.BOLD, Label.of("100 times"), Color.RED)),
-                execute.link(
-                        graph().with(mkString, printf),
-                        to(compare).with(Color.RED)),
-                init.link(mkString));
-        Graphviz.fromGraph(g).width(900).render(Format.PNG).toFile(new File("example/ex2.png"));
+    public Graph toGraphiz() throws IOException {
+        Graph g = graph("example1").directed()
+                .graphAttr().with(RankDir.TOP_TO_BOTTOM)
+                .with(
+                        node("a").with(Color.RED).link(node("b")).link(node("er")),
+                        node("b").link(Factory.to(node("c")).with(Style.DASHED)),
+                        node("er").with(Color.GREEN)
+                );
+        return g;
     }
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {

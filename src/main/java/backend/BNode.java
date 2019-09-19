@@ -14,11 +14,11 @@ public class BNode<T extends Comparable<T>> extends AbstractNode implements Comp
     private BNode right = null;
     private T value = null;
 
-    BNode(){ super();};
+    BNode(){ super();}
 
     BNode(T value){
             this.value = value;
-        };
+        }
 
     public BNode getLeft() {
             return left;
@@ -51,4 +51,13 @@ public class BNode<T extends Comparable<T>> extends AbstractNode implements Comp
         return this.getValue().compareTo(other.getValue());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

@@ -23,8 +23,6 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode implements Com
         this.value = value;
     }
 
-    ;
-
     public RBNode getLeft() {
         return left;
     }

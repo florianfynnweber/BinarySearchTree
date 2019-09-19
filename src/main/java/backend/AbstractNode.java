@@ -11,11 +11,11 @@ package backend;
 public abstract class AbstractNode<T extends Comparable<T>> {
     protected T value; // integer value
 
-    AbstractNode(){};
+    AbstractNode(){}
 
     AbstractNode(T value){
         this.value = value;
-    };
+    }
 
     public T getValue() {
         return value;
@@ -27,5 +27,5 @@ public abstract class AbstractNode<T extends Comparable<T>> {
 
     public  String toString(){
         return value.toString();
-    };
+    }
 }
