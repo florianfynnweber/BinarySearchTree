@@ -4,24 +4,26 @@ package backend; /**
  *
  * @author wolke
  * @version 1.1, 19.08.2019
- *
  */
 
 import java.awt.Color;
 
 
-public class RBNode<T extends Comparable<T>> extends AbstractNode implements Comparable{
+public class RBNode<T extends Comparable<T>> extends AbstractNode implements Comparable {
     private RBNode left = null;
     private RBNode right = null;
+    private T value = null;
     private Color color = Color.RED;
 
-    RBNode(){
+    RBNode() {
         super();
     }
 
-    RBNode(T value){
-        value = value;
-    };
+    RBNode(T value) {
+        this.value = value;
+    }
+
+    ;
 
     public RBNode getLeft() {
         return left;
@@ -39,17 +41,26 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode implements Com
         this.right = right;
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         this.color = color;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return this.color;
+    }
+
+    @Override
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(Comparable value) {
+        this.value = (T) value;
     }
 
     @Override
     public int compareTo(Object o) {
         RBNode<T> other = (RBNode<T>) o;
-        return getValue().compareTo(other.getValue());
+        return this.getValue().compareTo(other.getValue());
     }
 }

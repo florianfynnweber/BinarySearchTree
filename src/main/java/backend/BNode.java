@@ -48,7 +48,7 @@ public class BNode<T extends Comparable<T>> extends AbstractNode implements Comp
     @Override
     public int compareTo(Object o) {
         BNode<T> other = (BNode<T>) o;
-        return getValue().compareTo(other.getValue());
+        return this.getValue().compareTo(other.getValue());
     }
 
 }
