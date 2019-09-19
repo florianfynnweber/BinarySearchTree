@@ -39,9 +39,9 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         } else {
             /* Otherwise, recur down the tree */
             if ((int) value < (int) tmp.getValue())
-                tmp.setLeft(insertRec(tmp.getLeft(), (int) value));
+                tmp.setLeft(insertRec(tmp.getLeft(), value));
             else if ((int) value > (int) tmp.getValue())
-                tmp.setRight(insertRec(tmp.getRight(), (int) value));
+                tmp.setRight(insertRec(tmp.getRight(), value));
             /* return the (unchanged) node pointer */
             return tmp;
         }
@@ -104,11 +104,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      */
     public boolean hasValue(Comparable value) {
         // check if value exist in search
-        if (search(root, (int) value) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return search(root, (int) value) != null;
     }
 
     /**
@@ -197,7 +193,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         guru.nidi.graphviz.model.Node mkString = node("mkString").with(Label.lines(LEFT, "make", "a", "multi-line"));
         guru.nidi.graphviz.model.Node printf = node("printf");
         Graph g = graph("example2").directed().with(
-                ((guru.nidi.graphviz.model.Node) main).link(
+                main.link(
                         to(node("parse").link(execute)).with(LinkAttr.weight(8)),
                         to(init).with(Style.DOTTED),
                         node("cleanup"),
