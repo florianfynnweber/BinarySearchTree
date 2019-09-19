@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinarySearchTree implements InterfaceBinarySearchTree {
-    BNode root;
+public class BinarySearchTreeBCK implements InterfaceBinarySearchTree {
+    Node<Node, Integer> root;
     ArrayList ordered;
 
-    public BinarySearchTree() {
+    public BinarySearchTreeBCK() {
         root = null;
     }
 
@@ -21,9 +21,9 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         root = insertRec(root, value);
     }
 
-    public BNode insertRec(BNode tmp, Comparable value) {
+    public Node insertRec(Node tmp, Comparable value) {
         if (tmp == null) {
-            tmp = new BNode(value);
+            tmp = new Node(value);
             return tmp;
         } else {
             /* Otherwise, recur down the tree */
@@ -47,7 +47,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     }
 
-    public BNode delete(BNode tmp, int key) {
+    public Node delete(Node tmp, int key) {
 
         if (tmp == null) return tmp;
 
@@ -77,7 +77,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return tmp;
     }
 
-    public int minValue(BNode tmp) {
+    public int minValue(Node tmp) {
         int minv = (int) tmp.getValue();
         while (tmp.getLeft() != null) {
             minv = (int) tmp.getLeft().getValue();
@@ -106,7 +106,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @param key integer
      * @param tmp current root
      */
-    public BNode search(BNode tmp, int key) {
+    public Node search(Node tmp, int key) {
         // root is null or key is present at root
         if (tmp == null || (int) tmp.getValue() == key)
             return tmp;
@@ -153,7 +153,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return null;
     }
 
-    public void getInorder(BNode node) {
+    public void getInorder(Node node) {
         if (node == null)
             return;
         getInorder(node.getLeft());
@@ -162,7 +162,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     }
 
-    public void getPostorder(BNode node) {
+    public void getPostorder(Node node) {
         if (node == null)
             return;
         getInorder(node.getLeft());
@@ -170,7 +170,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         ordered.add(node.getValue());
     }
 
-    public void getPreorder(BNode node) {
+    public void getPreorder(Node node) {
         if (node == null)
             return;
         ordered.add(node.getValue());
@@ -179,8 +179,8 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
     }
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {
-        BinarySearchTree tree = new BinarySearchTree();
-        tree.root = new BNode<Integer>(10);
+        BinarySearchTreeBCK tree = new BinarySearchTreeBCK();
+        tree.root = new Node<Node, Integer>(10);
         tree.addValue(5);
         tree.addValue(20);
         tree.addValue(25);
