@@ -62,6 +62,7 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnDelete.setOnAction(e ->{
             try {
+
                 tree.delValue(textFIn.getText());
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
