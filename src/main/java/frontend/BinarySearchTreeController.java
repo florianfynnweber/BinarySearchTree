@@ -47,14 +47,12 @@ public class BinarySearchTreeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         transverseBox.setItems(FXCollections.observableList(Arrays.asList(Order.values())));
         transverseBox.getSelectionModel().select(Order.INORDER);
-
         transverseBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             List result = tree.traverse((Order) transverseBox.getValue());
             transverseResult.setText(result.toString());
         });
         btnAdd.setOnAction(e ->{
             try {
-                System.out.println("hi");
                 tree.addValue(textFIn.getText());
                 System.out.println(tree.traverse(Order.INORDER));
                 textFIn.setText("");
@@ -64,24 +62,18 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnDelete.setOnAction(e ->{
             try {
-                System.out.println("hi2");
                 tree.delValue(textFIn.getText());
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
             }
         });
         btnSearch.setOnAction(e -> {
-            System.out.println("hi3");
             tree.hasValue(textFIn.getText());
 
         });
         try {
             gr = Graphviz.fromGraph(tree.toGraphiz()).render(Format.SVG).toImage();
-            System.out.println("hi1");
-            System.out.println("hi2");
-            System.out.println("hi3");
             this.imageView.setImage(SwingFXUtils.toFXImage(gr, null));
-
         } catch (IOException e) {
             e.printStackTrace();
         }

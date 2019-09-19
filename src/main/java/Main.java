@@ -56,17 +56,3 @@ public class Main extends Application {
         }
     }
 }
-
-/*
-* @Override
-    public void start(Stage primaryStage) throws Exception {
-        // load fxml
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/Gui.fxml"));
-        // set tilte of the windwo
-        primaryStage.setTitle("Binary search tree");
-        // create new scene
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }*/
