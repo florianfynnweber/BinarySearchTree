@@ -12,11 +12,12 @@ package backend;
 public class BNode<T extends Comparable<T>> extends AbstractNode implements Comparable{
     private BNode left = null;
     private BNode right = null;
+    private T value = null;
 
     BNode(){ super();};
 
     BNode(T value){
-            value = value;
+            this.value = value;
         };
 
     public BNode getLeft() {
@@ -35,10 +36,19 @@ public class BNode<T extends Comparable<T>> extends AbstractNode implements Comp
         this.right = right;
     }
 
+    @Override
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(Comparable value) {
+        this.value = (T) value;
+    }
 
     @Override
     public int compareTo(Object o) {
         BNode<T> other = (BNode<T>) o;
         return getValue().compareTo(other.getValue());
     }
+
 }
