@@ -19,9 +19,6 @@
                      <effect>
                         <Blend />
                      </effect>
-                     <image>
-                        <Image url="@../../../../../../../../../Pictures/Friedrich_August_von_Hayek_1981.jpg" />
-                     </image>
                   </ImageView>
                </children>
             </AnchorPane>

@@ -6,12 +6,13 @@ package backend; /**
  * @version 1.1, 19.08.2019
  */
 
-import java.awt.*;
+import java.awt.Color;
 
 
-public class RBNode<T extends Comparable<T>> extends AbstractNode<T> implements Comparable {
+public class RBNode<T extends Comparable<T>> extends AbstractNode implements Comparable {
     private RBNode left = null;
     private RBNode right = null;
+    private T value = null;
     private Color color = Color.RED;
 
     RBNode() {
@@ -19,7 +20,7 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode<T> implements 
     }
 
     RBNode(T value) {
-        value = value;
+        this.value = value;
     }
 
     ;
@@ -49,8 +50,17 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode<T> implements 
     }
 
     @Override
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(Comparable value) {
+        this.value = (T) value;
+    }
+
+    @Override
     public int compareTo(Object o) {
         RBNode<T> other = (RBNode<T>) o;
-        return getValue().compareTo(other.getValue());
+        return this.getValue().compareTo(other.getValue());
     }
 }
