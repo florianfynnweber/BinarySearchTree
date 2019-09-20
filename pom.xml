@@ -47,6 +47,12 @@
             <artifactId>bootstrapfx-core</artifactId>
             <version>0.2.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>

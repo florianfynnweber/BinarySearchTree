@@ -51,25 +51,33 @@ public class BinarySearchTreeController implements Initializable {
             List result = tree.traverse((Order) transverseBox.getValue());
             transverseResult.setText(result.toString());
         });
-        btnAdd.setOnAction(e ->{
+        btnAdd.setOnAction(e -> {
             try {
-                tree.addValue(textFIn.getText());
+                tree.addValue(Integer.parseInt(textFIn.getText()));
                 System.out.println(tree.traverse(Order.INORDER));
                 textFIn.setText("");
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
             }
         });
-        btnDelete.setOnAction(e ->{
+        btnDelete.setOnAction(e -> {
             try {
-                tree.delValue(textFIn.getText());
+
+                tree.delValue(Integer.parseInt(textFIn.getText()));
             } catch (BinarySearchTreeException ex) {
+                ex.printStackTrace();
+            } catch (NumberFormatException ex) {
                 ex.printStackTrace();
             }
         });
         btnSearch.setOnAction(e -> {
-            tree.hasValue(textFIn.getText());
-
+            try {
+                tree.hasValue(Integer.parseInt(textFIn.getText()));
+            }catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
         });
         try {
             gr = Graphviz.fromGraph(tree.toGraphiz()).render(Format.SVG).toImage();
