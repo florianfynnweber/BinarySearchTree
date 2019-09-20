@@ -37,7 +37,12 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void delValue() {
+    void delValue() throws BinarySearchTreeException {
+        this.addNodesToTree(6);
+        tree.addValue(800);
+        assertTrue(tree.hasValue(800));
+        tree.delValue(800);
+        assertFalse(tree.hasValue(800));
     }
 
     @Test
@@ -46,11 +51,10 @@ class BinarySearchTreeTest {
         tree.addValue(800);
         assertTrue(tree.hasValue(800));
         assertFalse(tree.hasValue(700));
-    }
-
-    @Test
-    void search() {
-    }
+        List li = tree.traverse(Order.PREORDER);
+        li.forEach((tmp)->{
+            assertTrue(tree.hasValue((Comparable) tmp));
+        });    }
 
     @Test
     void getDepth() {
