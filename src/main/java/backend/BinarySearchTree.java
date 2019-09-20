@@ -196,7 +196,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {
         BinarySearchTree tree = new BinarySearchTree();
-        tree.root = new BNode<Integer>(10);
+        //tree.root = new BNode<Integer>(10);
         tree.addValue(5);
         tree.addValue(20);
         tree.addValue(25);
