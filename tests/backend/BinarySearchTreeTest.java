@@ -42,7 +42,7 @@ class BinarySearchTreeTest {
         tree.addValue(800);
         assertTrue(tree.hasValue(800));
         tree.delValue(800);
-        assertFalse(tree.hasValue(800));
+        assertFalse(tree.hasValue(800));}
 
     @Test
     void hasValue() throws BinarySearchTreeException {
