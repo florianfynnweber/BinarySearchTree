@@ -171,10 +171,10 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return null;
     }
     public void getLevelorder(BNode node){
-        int h = depth(root);
+        int h = depth(node);
         int i;
         for (i=1; i<=h; i++)
-            atGivenDepth(root, i);
+            atGivenDepth(node, i);
     }
 
     private void atGivenDepth(BNode node, int i) {
