@@ -43,7 +43,6 @@ class BinarySearchTreeTest {
         assertTrue(tree.hasValue(800));
         tree.delValue(800);
         assertFalse(tree.hasValue(800));
-    }
 
     @Test
     void hasValue() throws BinarySearchTreeException {
@@ -51,6 +50,7 @@ class BinarySearchTreeTest {
         tree.addValue(800);
         assertTrue(tree.hasValue(800));
         assertFalse(tree.hasValue(700));
+
         List li = tree.traverse(Order.PREORDER);
         li.forEach((tmp)->{
             assertTrue(tree.hasValue((Comparable) tmp));
