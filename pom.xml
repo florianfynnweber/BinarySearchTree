@@ -53,6 +53,11 @@
             <version>2.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.diffplug.spotless</groupId>
+            <artifactId>spotless-maven-plugin</artifactId>
+            <version>1.24.1</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -79,6 +84,17 @@
                     <mainClass>Main</mainClass>
                     <executable>${java.home}/bin/java</executable>
                     <includePathExceptionsInClasspath>true</includePathExceptionsInClasspath>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <!--suppress UnresolvedMavenProperty -->
+                <version>1.24.1</version>
+                <configuration>
+                    <java>
+
+                    </java>
                 </configuration>
             </plugin>
         </plugins>
