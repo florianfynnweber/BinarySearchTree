@@ -105,13 +105,14 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return search(root, (int) value) != null;
     }
 
+
     /**
      * Search recursive in tree
      *
      * @param key integer
      * @param tmp current root
      */
-    public BNode search(BNode tmp, int key) {
+    public AbstractNode search(AbstractNode tmp, int key) {
         // root is null or key is present at root
         if (tmp == null || (int) tmp.getValue() == key)
             return tmp;
@@ -134,7 +135,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return depth(root);
     }
 
-    public int depth(BNode root){
+    public int depth(AbstractNode root){
         if (root==null){
             return 0;
         }else {
@@ -170,14 +171,14 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         }
         return null;
     }
-    public void getLevelorder(BNode node){
+    public void getLevelorder(AbstractNode node){
         int h = depth(node);
         int i;
         for (i=1; i<=h; i++)
             atGivenDepth(node, i);
     }
 
-    private void atGivenDepth(BNode node, int i) {
+    private void atGivenDepth(AbstractNode node, int i) {
         if (node == null)
             return;
         if (i == 1){
@@ -188,7 +189,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         }
     }
 
-    public void getInorder(BNode node) {
+    public void getInorder(AbstractNode node) {
         if (node == null)
             return;
         getInorder(node.getLeft());
@@ -197,7 +198,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     }
 
-    public void getPostorder(BNode node) {
+    public void getPostorder(AbstractNode node) {
         if (node == null)
             return;
         getInorder(node.getLeft());
@@ -205,7 +206,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         ordered.add(node.getValue());
     }
 
-    public void getPreorder(BNode node) {
+    public void getPreorder(AbstractNode node) {
         if (node == null)
             return;
         ordered.add(node.getValue());
