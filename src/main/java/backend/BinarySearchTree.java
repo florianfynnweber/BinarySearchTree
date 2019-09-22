@@ -86,7 +86,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return tmp;
     }
 
-    public int minValue(BNode tmp) {
+    public int minValue(AbstractNode tmp) {
         int minv = (int) tmp.getValue();
         while (tmp.getLeft() != null) {
             minv = (int) tmp.getLeft().getValue();
@@ -105,13 +105,14 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return search(root, (int) value) != null;
     }
 
+
     /**
      * Search recursive in tree
      *
      * @param key integer
      * @param tmp current root
      */
-    public BNode search(BNode tmp, int key) {
+    public AbstractNode search(AbstractNode tmp, int key) {
         // root is null or key is present at root
         if (tmp == null || (int) tmp.getValue() == key)
             return tmp;
@@ -131,7 +132,19 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
      * @return depth of tree
      */
     public Integer getDepth() {
-        return null;
+        return depth(root);
+    }
+
+    public int depth(AbstractNode root){
+        if (root==null){
+            return 0;
+        }else {
+            int lheight = depth(root.getLeft());
+            int rheight = depth(root.getRight());
+            if (lheight > rheight)
+                return(lheight+1);
+            else return(rheight+1);
+        }
     }
 
     /**
@@ -153,12 +166,30 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
                 getPostorder(root);
                 return ordered;
             case LEVELORDER:
-                return null;
+                getLevelorder(root);
+                return ordered;
         }
         return null;
     }
+    public void getLevelorder(AbstractNode node){
+        int h = depth(node);
+        int i;
+        for (i=1; i<=h; i++)
+            atGivenDepth(node, i);
+    }
 
-    public void getInorder(BNode node) {
+    private void atGivenDepth(AbstractNode node, int i) {
+        if (node == null)
+            return;
+        if (i == 1){
+            ordered.add(node.getValue());
+        }else if (i>1) {
+            atGivenDepth(node.getLeft(), i-1);
+            atGivenDepth(node.getRight(), i-1);
+        }
+    }
+
+    public void getInorder(AbstractNode node) {
         if (node == null)
             return;
         getInorder(node.getLeft());
@@ -167,7 +198,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     }
 
-    public void getPostorder(BNode node) {
+    public void getPostorder(AbstractNode node) {
         if (node == null)
             return;
         getInorder(node.getLeft());
@@ -175,7 +206,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         ordered.add(node.getValue());
     }
 
-    public void getPreorder(BNode node) {
+    public void getPreorder(AbstractNode node) {
         if (node == null)
             return;
         ordered.add(node.getValue());
@@ -215,6 +246,8 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.traverse(Order.POSTORDER));
         System.out.println(tree.traverse(Order.PREORDER));
+        System.out.println(tree.traverse(Order.LEVELORDER));
+        System.out.println(tree.getDepth());
     }
 
 
