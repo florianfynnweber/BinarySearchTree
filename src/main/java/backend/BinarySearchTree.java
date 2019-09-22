@@ -86,7 +86,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return tmp;
     }
 
-    public int minValue(BNode tmp) {
+    public int minValue(AbstractNode tmp) {
         int minv = (int) tmp.getValue();
         while (tmp.getLeft() != null) {
             minv = (int) tmp.getLeft().getValue();
