@@ -216,7 +216,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     public Graph toGraphiz() throws IOException {
         Graph g = graph("example1").directed()
-                .graphAttr().with(RankDir.TOP_TO_BOTTOM)
+                .graphAttr().with(RankDir.TOP_TO_BOTTOM, Color.rgba("00000000").background())
                 .with(
                         node("a").with(Color.RED).link(node("b")).link(node("er")),
                         node("b").link(Factory.to(node("c")).with(Style.DASHED)),
