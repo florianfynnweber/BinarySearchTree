@@ -1,0 +1,6 @@
+language: java
+sudo: false
+cache:
+  directories:
+    - $HOME/.m2
+script: mvn clean verify spotless:apply spotless:check

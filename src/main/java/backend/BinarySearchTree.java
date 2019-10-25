@@ -196,17 +196,22 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {
         BinarySearchTree tree = new BinarySearchTree();
-        tree.root = new BNode<Integer>(10);
-        tree.addValue(5);
-        tree.addValue(20);
-        tree.addValue(25);
+        //tree.root = new BNode<Integer>(10);
+        //tree.addValue(5);
+        //tree.addValue(20);
+        //tree.addValue(25);
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.hasValue(5));
         System.out.println(tree.hasValue(1000000));
-        tree.addValue(3);
+        //tree.addValue(3);
         System.out.println(tree.traverse(Order.POSTORDER));
-        tree.addValue(1);
-        tree.delValue(23);
+        //tree.addValue(1);
+        //tree.delValue(23);
+        tree.addValue(5);
+        tree.addValue(3);
+        tree.addValue(2);
+        tree.addValue(6);
+        tree.addValue(7);
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.traverse(Order.POSTORDER));
         System.out.println(tree.traverse(Order.PREORDER));
