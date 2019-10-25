@@ -46,7 +46,7 @@ public class Main extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("frontend/MilansGuiTest.fxml"));
+            loader.setLocation(Main.class.getResource("frontend/Gui.fxml"));
             AnchorPane personOverview = loader.load();
 
             // Set person overview into the center of root layout.

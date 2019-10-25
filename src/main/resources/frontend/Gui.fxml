@@ -17,7 +17,7 @@
                <children>
                    <ImageView fx:id="imageView" fitHeight="171.0" fitWidth="281.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="153.0">
                        <image>
-                           <Image url="@../../../../../../../../Bilder/3431596-rick+and+morty+featured+image.jpg" />
+                           <!--<Image url="@../../../../../../../../Bilder/3431596-rick+and+morty+featured+image.jpg" />-->
                        </image></ImageView>
                </children>
             </AnchorPane>
