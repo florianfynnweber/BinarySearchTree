@@ -12,6 +12,8 @@ import java.util.List;
 
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
+import static java.awt.Color.BLACK;
+import static java.awt.Color.RED;
 
 public class RedBlackTree implements InterfaceBinarySearchTree {
     RBNode root;
@@ -27,24 +29,77 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
      * @param value The Node obj that should be add
      */
     public void addValue(Comparable value) throws BinarySearchTreeException {
-        root = insertRec(root, value);
+        root = insertRec(root, value, null);
+    }
+    // funcktioniert noch nicht
+    public RBNode findUncle(RBNode node, RBNode parent){
+        if (parent !=null){
+            if (parent.getRight() == null && parent.getLeft() == null){
+                node.setUncle(null);
+            }else if(parent.getRight() != null){
+                node.setUncle(parent.getRight());
+                System.out.println("my right uncle is"+ node.getUncle().getValue());
+            }else if (parent.getLeft() != null){
+                node.setUncle(parent.getLeft());
+                System.out.println("my left uncle is"+ node.getUncle().getValue());
+            }
+        }
+        return node;
     }
 
-    public RBNode insertRec(RBNode tmp, Comparable value) {
+    public RBNode insertRec(RBNode tmp, Comparable value, RBNode parent) {
         if (tmp == null) {
-            tmp = new RBNode(value);
+            tmp = new RBNode(value, parent);
+            tmp = findUncle(tmp, parent);
+            insert_case1(tmp);
             return tmp;
         } else {
             /* Otherwise, recur down the tree */
             if ((int) value < (int) tmp.getValue())
-                tmp.setLeft(insertRec(tmp.getLeft(), value));
+                tmp.setLeft(insertRec(tmp.getLeft(), value, tmp));
             else if ((int) value > (int) tmp.getValue())
-                tmp.setRight(insertRec(tmp.getRight(), value));
+                tmp.setRight(insertRec(tmp.getRight(), value, tmp));
             /* return the (unchanged) node pointer */
             return tmp;
         }
     }
 
+    public void fixTreeAddNode() {
+
+    }
+
+    public void insert_case1(RBNode node) {
+        if (node.getParent() == null) {
+            System.out.println("New Node is added as the root of the tree");
+            node.setColor(BLACK);
+        } else {
+            insert_case2(node);
+        }
+    }
+
+    public void insert_case2(RBNode node) {
+        if (node.getParent().getColor() == BLACK) {
+            System.out.println("Parent of new node is black");
+        } else {
+            insert_case3(node);
+        }
+    }
+
+    public void insert_case3(RBNode node) {
+        if ((node.getUncle() != null) && (node.getUncle().getColor() == RED)) {
+            System.out.println("Parent and uncle of new node are red");
+            node.getParent().setColor(BLACK);
+            node.getUncle().setColor(BLACK);
+            node.getParent().getParent().setColor(RED);
+            insert_case1(node.getParent().getParent());
+        } else {
+            insert_case4(node.getParent().getParent());
+        }
+    }
+
+    private void insert_case4(RBNode node) {
+
+    }
 
 
     /**
@@ -136,15 +191,15 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         return depth(root);
     }
 
-    public int depth(AbstractNode root){
-        if (root==null){
+    public int depth(AbstractNode root) {
+        if (root == null) {
             return 0;
-        }else {
+        } else {
             int lheight = depth(root.getLeft());
             int rheight = depth(root.getRight());
             if (lheight > rheight)
-                return(lheight+1);
-            else return(rheight+1);
+                return (lheight + 1);
+            else return (rheight + 1);
         }
     }
 
@@ -172,21 +227,22 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
         return null;
     }
-    public void getLevelorder(AbstractNode node){
+
+    public void getLevelorder(AbstractNode node) {
         int h = depth(node);
         int i;
-        for (i=1; i<=h; i++)
+        for (i = 1; i <= h; i++)
             atGivenDepth(node, i);
     }
 
     private void atGivenDepth(AbstractNode node, int i) {
         if (node == null)
             return;
-        if (i == 1){
+        if (i == 1) {
             ordered.add(node.getValue());
-        }else if (i>1) {
-            atGivenDepth(node.getLeft(), i-1);
-            atGivenDepth(node.getRight(), i-1);
+        } else if (i > 1) {
+            atGivenDepth(node.getLeft(), i - 1);
+            atGivenDepth(node.getRight(), i - 1);
         }
     }
 
