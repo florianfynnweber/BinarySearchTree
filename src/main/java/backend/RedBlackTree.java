@@ -13,11 +13,11 @@ import java.util.List;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 
-public class BinarySearchTree implements InterfaceBinarySearchTree {
-    BNode root;
+public class RedBlackTree implements InterfaceBinarySearchTree {
+    RBNode root;
     ArrayList ordered;
 
-    public BinarySearchTree() {
+    public RedBlackTree() {
         root = null;
     }
 
@@ -30,9 +30,9 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         root = insertRec(root, value);
     }
 
-    public BNode insertRec(BNode tmp, Comparable value) {
+    public RBNode insertRec(RBNode tmp, Comparable value) {
         if (tmp == null) {
-            tmp = new BNode(value);
+            tmp = new RBNode(value);
             return tmp;
         } else {
             /* Otherwise, recur down the tree */
@@ -57,7 +57,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     }
 
-    public BNode delete(BNode tmp, int key) {
+    public RBNode delete(RBNode tmp, int key) {
 
         if (tmp == null) return tmp;
 
@@ -226,8 +226,8 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return g;
     }
 
-    public static void main(String[] args) throws BinarySearchTreeException, IOException {
-        BinarySearchTree tree = new BinarySearchTree();
+    public static void main(String[] args) throws BinarySearchTreeException {
+        RedBlackTree tree = new RedBlackTree();
         //tree.root = new BNode<Integer>(10);
         //tree.addValue(5);
         //tree.addValue(20);
@@ -249,7 +249,6 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         System.out.println(tree.traverse(Order.PREORDER));
         System.out.println(tree.traverse(Order.LEVELORDER));
         System.out.println(tree.getDepth());
+        System.out.println(tree.hasValue(10));
     }
-
-
 }
