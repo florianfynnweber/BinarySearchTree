@@ -98,9 +98,16 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     }
 
     private void insert_case4(RBNode node) {
-
+        if (node==node.getParent().getRight() && node.getParent() == node.getParent().getParent().getLeft()){
+            System.out.println("routate left");
+        }else if (node==node.getParent().getLeft() && node.getParent()==node.getParent().getParent().getRight()){
+            System.out.println("rotate right");
+        }
     }
 
+    private void insert_Case5(RBNode node){
+
+    }
 
     /**
      * Delete a Node to the tree
