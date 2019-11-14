@@ -31,17 +31,18 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     public void addValue(Comparable value) throws BinarySearchTreeException {
         root = insertRec(root, value, null);
     }
-    // funcktioniert noch nicht
-    public RBNode findUncle(RBNode node, RBNode parent){
-        if (parent !=null){
-            if (parent.getRight() == null && parent.getLeft() == null){
+
+   // funcktioniert noch nicht
+    public RBNode findUncle(RBNode node, RBNode parent) {
+        if (parent != null) {
+            if (parent.getRight() == null && parent.getLeft() == null) {
                 node.setUncle(null);
-            }else if(parent.getRight() != null){
+            } else if (parent.getRight() != null) {
                 node.setUncle(parent.getRight());
-                System.out.println("my right uncle is"+ node.getUncle().getValue());
-            }else if (parent.getLeft() != null){
+                System.out.println("my right uncle is" + node.getUncle().getValue());
+            } else if (parent.getLeft() != null) {
                 node.setUncle(parent.getLeft());
-                System.out.println("my left uncle is"+ node.getUncle().getValue());
+                System.out.println("my left uncle is" + node.getUncle().getValue());
             }
         }
         return node;
@@ -62,10 +63,6 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
             /* return the (unchanged) node pointer */
             return tmp;
         }
-    }
-
-    public void fixTreeAddNode() {
-
     }
 
     public void insert_case1(RBNode node) {
@@ -98,14 +95,117 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     }
 
     private void insert_case4(RBNode node) {
-        if (node==node.getParent().getRight() && node.getParent() == node.getParent().getParent().getLeft()){
+        if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getLeft())) {
+            // rotate with parent
             System.out.println("routate left");
-        }else if (node==node.getParent().getLeft() && node.getParent()==node.getParent().getParent().getRight()){
+            node = node.getLeft();
+        } else if ((node == node.getParent().getLeft()) && (node.getParent() == node.getParent().getParent().getRight())) {
+            //rotate with parent
             System.out.println("rotate right");
+            node = node.getRight();
+        }
+        insert_Case5(node);
+    }
+
+    private void insert_Case5(RBNode node) {
+        if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getLeft())) {
+            // rotate with grandparent
+            System.out.println("rotate right");
+        } else if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getRight())) {
+            // rotate with grandparent
+            System.out.println("rotate left");
+            node.getParent().setColor(BLACK);
+            node.getParent().getParent().setColor(RED);
         }
     }
 
-    private void insert_Case5(RBNode node){
+    private void del_case1(RBNode node) {
+        if (node.getParent() != null) {
+            del_case2(node);
+        } else {
+            delete(node, (int) node.getValue());
+        }
+    }
+
+    private void del_case2(RBNode node) {
+        if (node.getSibling().getColor()==RED){
+            if (node == node.getParent().getLeft()){
+                rotate_left(node.getParent());
+            }else{
+                rotate_right((node.getParent()));
+                node.getParent().setColor(RED);
+                node.getSibling().setColor(BLACK);
+            }
+        }
+        del_case3(node);
+    }
+
+    private void del_case3(RBNode node) {
+        if((node.getParent().getColor()==BLACK) && (node.getSibling().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getLeft().getColor()== BLACK)){
+            node.getSibling().setColor(RED);
+            del_case1(node.getParent());
+        }else{
+            del_case4(node);
+        }
+    }
+
+    private void del_case4(RBNode node) {
+        if((node.getParent().getColor()==RED) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor()==BLACK)){
+            node.getSibling().setColor(RED);
+            node.getParent().setColor(BLACK);
+        }else{
+            del_case5(node);
+        }
+    }
+
+    private void del_case5(RBNode node) {
+        if ((node==node.getLeft()) && (node.getSibling().getRight().getColor()==BLACK) && (node.getSibling().getLeft().getColor() == RED)){
+            rotate_right(node.getSibling());
+        }else if ((node==node.getParent().getRight()) && (node.getSibling().getLeft().getColor()==BLACK) && (node.getSibling().getRight().getColor()==RED)){
+            rotate_left(node.getSibling());
+            node.getSibling().setColor(RED);
+            node.getSibling().getRight().setColor(BLACK);
+        }
+        del_case6(node);
+    }
+
+    private void del_case6(RBNode node) {
+        node.getSibling().setColor(node.getParent().getColor());
+        if(node==node.getParent().getLeft()){
+            node.getSibling().getRight().setColor(BLACK);
+            rotate_left(node.getParent());
+        }else {
+            node.getSibling().getLeft().setColor(BLACK);
+            rotate_right(node.getParent());
+        }
+    }
+
+    private void rotate_left(RBNode node) {
+        if (node.getParent() !=null){
+            if (node == node.getParent().getLeft()){
+                node.getParent().setLeft(node.getRight());
+            }else {
+                node.getParent().setRight(node.getRight());
+            }
+            node.getRight().setParent(node.getParent());
+            node.setParent(node.getRight());
+            if (node.getRight().getLeft()!=null){
+                node.getRight().getLeft().setParent(node);
+            }
+            node.setRight(node.getRight().getLeft());
+            node.getParent().setLeft(node);
+        } else {
+            RBNode right = root.getRight();
+            root.setRight(right.getLeft());
+            right.getLeft().setParent(root);
+            root.setParent(right);
+            right.setLeft(root);
+            right.setParent(null);
+            root = right;
+        }
+    }
+
+    private void rotate_right(RBNode node) {
 
     }
 

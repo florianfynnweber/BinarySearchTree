@@ -14,6 +14,7 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode implements Com
     private RBNode right = null;
     private RBNode parent = null;
     private RBNode uncle = null;
+    private RBNode sibling = null;
     private T value = null;
     private Color color = Color.RED;
 
@@ -78,10 +79,25 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode implements Com
     }
 
     public RBNode getUncle() {
+        if (this.getParent() != null && this.getParent().getParent() != null){
+            if (this.getParent().getParent().getLeft() == this.getParent()){
+                return this.getParent().getParent().getRight();
+            }else {
+                return this.getParent().getParent().getLeft();
+            }
+        }
         return uncle;
     }
 
     public void setUncle(RBNode uncle) {
         this.uncle = uncle;
+    }
+
+    public RBNode getSibling() {
+        return sibling;
+    }
+
+    public void setSibling(RBNode sibling) {
+        this.sibling = sibling;
     }
 }
