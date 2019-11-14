@@ -420,7 +420,7 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         //tree.delValue(23);
         tree.addValue(5);
         tree.addValue(3);
-        tree.addValue(2);
+        /**tree.addValue(2);
         tree.addValue(6);
         tree.addValue(7);
         System.out.println(tree.traverse(Order.INORDER));
@@ -428,6 +428,9 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         System.out.println(tree.traverse(Order.PREORDER));
         System.out.println(tree.traverse(Order.LEVELORDER));
         System.out.println(tree.getDepth());
-        System.out.println(tree.hasValue(10));
+        System.out.println(tree.hasValue(10));**/
+        System.out.println(tree.traverse(Order.PREORDER));
+        tree.rotate_right(tree.root);
+        System.out.println(tree.traverse(Order.PREORDER));
     }
 }
