@@ -257,7 +257,6 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
                 graphvizTree(root.getRight());
             }
         }
-        System.out.println(this.treeDot);
     }
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {

@@ -46,7 +46,7 @@
                                <Label layoutX="11.0" layoutY="188.0" text="Search Value:" textAlignment="RIGHT" />
                                <TextField fx:id="textFInSearch" layoutX="116.0" layoutY="184.0" prefHeight="25.0" prefWidth="119.0" />
                                <Button fx:id="btnSearch" layoutX="245.0" layoutY="184.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="86.0" styleClass="btn-warning" text="Search" />
-                               <Label fx:id="resultSearch" layoutX="116.0" layoutY="230.0" prefHeight="20.0" prefWidth="170.0">
+                               <Label fx:id="resultSearch" layoutX="178.0" layoutY="233.0" prefHeight="20.0" prefWidth="170.0">
                                    <font>
                                        <Font size="14.0" />
                                    </font>
@@ -59,7 +59,7 @@
                                </Label>
                                <ComboBox fx:id="transverseBox" layoutX="11.0" layoutY="275.0" prefWidth="150.0" promptText="Order" styleClass="split-menu-btn-primary" />
                                <Label fx:id="transverseResult" layoutX="128.0" layoutY="322.0" />
-                        <Label fx:id="depth" layoutX="142.0" layoutY="233.0" />
+                        <Label fx:id="depth" layoutX="123.0" layoutY="233.0" prefHeight="21.0" prefWidth="14.0" />
                            </children>
                        </AnchorPane>
                    </content>
