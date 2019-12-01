@@ -110,7 +110,7 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     }
 
     private void insert_Case5(RBNode node) {
-        if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getLeft())) {
+        if ((node == node.getParent().getLeft()) && (node.getParent() == node.getParent().getParent().getLeft())) {
             // rotate with grandparent
             this.rotate_right(node.getParent().getParent());
             // System.out.println("rotate right");
@@ -424,6 +424,8 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         //tree.delValue(23);
         tree.addValue(5);
         tree.addValue(3);
+        tree.addValue(6);
+        tree.addValue(1);
         /**tree.addValue(2);
         tree.addValue(6);
         tree.addValue(7);
@@ -434,7 +436,7 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         System.out.println(tree.getDepth());
         System.out.println(tree.hasValue(10));**/
         System.out.println(tree.traverse(Order.PREORDER));
-        tree.rotate_right(tree.root);
-        System.out.println(tree.traverse(Order.PREORDER));
+        //tree.rotate_right(tree.root);
+        System.out.println(tree.traverse(Order.LEVELORDER));
     }
 }
