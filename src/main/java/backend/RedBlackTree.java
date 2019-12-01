@@ -123,6 +123,55 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Delete a Node to the tree
+     *
+     * @param value The Node obj that should be delete
+     */
+    public void delValue(Comparable value) throws BinarySearchTreeException {
+        root = delete(root, (int) value);
+
+    }
+
+    public RBNode delete(RBNode tmp, int key) {
+
+        if (tmp == null) return tmp;
+
+        /* Otherwise, recur down the tree */
+        if (key < (int) tmp.getValue())
+            tmp.setLeft(delete(tmp.getLeft(), key));
+        else if (key > (int) tmp.getValue())
+            tmp.setRight(delete(tmp.getRight(), key));
+
+            // if key is same as tmp's key, then This is the node
+            // to be deleted
+        else {
+            // node with only one child or no child
+            if (tmp.getLeft() == null)
+                return tmp.getRight();
+            else if (tmp.getRight() == null)
+                return tmp.getLeft();
+
+            // node with two children: Get the inorder successor (smallest
+            // in the right subtree)
+            tmp.setValue(minValue(tmp.getRight()));
+
+            // Delete the inorder successor
+            tmp.setRight(delete(tmp.getRight(), (int) tmp.getValue()));
+        }
+
+        return tmp;
+    }
+
+    public int minValue(AbstractNode tmp) {
+        int minv = (int) tmp.getValue();
+        while (tmp.getLeft() != null) {
+            minv = (int) tmp.getLeft().getValue();
+            tmp = tmp.getLeft();
+        }
+        return minv;
+    }
+
     private void del_case1(RBNode node) {
         if (node.getParent() != null) {
             del_case2(node);
@@ -145,7 +194,7 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     }
 
     private void del_case3(RBNode node) {
-        if ((node.getParent().getColor() == BLACK) && (node.getSibling().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == BLACK)) {
+        if ((node.getParent().getColor() == BLACK) && (node.getSibling().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor() == BLACK)) {
             node.getSibling().setColor(RED);
             del_case1(node.getParent());
         } else {
@@ -227,55 +276,6 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
             left.setParent(null);
             root = left;
         }
-    }
-
-    /**
-     * Delete a Node to the tree
-     *
-     * @param value The Node obj that should be delete
-     */
-    public void delValue(Comparable value) throws BinarySearchTreeException {
-        root = delete(root, (int) value);
-
-    }
-
-    public RBNode delete(RBNode tmp, int key) {
-
-        if (tmp == null) return tmp;
-
-        /* Otherwise, recur down the tree */
-        if (key < (int) tmp.getValue())
-            tmp.setLeft(delete(tmp.getLeft(), key));
-        else if (key > (int) tmp.getValue())
-            tmp.setRight(delete(tmp.getRight(), key));
-
-            // if key is same as tmp's key, then This is the node
-            // to be deleted
-        else {
-            // node with only one child or no child
-            if (tmp.getLeft() == null)
-                return tmp.getRight();
-            else if (tmp.getRight() == null)
-                return tmp.getLeft();
-
-            // node with two children: Get the inorder successor (smallest
-            // in the right subtree)
-            tmp.setValue(minValue(tmp.getRight()));
-
-            // Delete the inorder successor
-            tmp.setRight(delete(tmp.getRight(), (int) tmp.getValue()));
-        }
-
-        return tmp;
-    }
-
-    public int minValue(AbstractNode tmp) {
-        int minv = (int) tmp.getValue();
-        while (tmp.getLeft() != null) {
-            minv = (int) tmp.getLeft().getValue();
-            tmp = tmp.getLeft();
-        }
-        return minv;
     }
 
     /**
@@ -427,14 +427,14 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         tree.addValue(6);
         tree.addValue(1);
         /**tree.addValue(2);
-        tree.addValue(6);
-        tree.addValue(7);
-        System.out.println(tree.traverse(Order.INORDER));
-        System.out.println(tree.traverse(Order.POSTORDER));
-        System.out.println(tree.traverse(Order.PREORDER));
-        System.out.println(tree.traverse(Order.LEVELORDER));
-        System.out.println(tree.getDepth());
-        System.out.println(tree.hasValue(10));**/
+         tree.addValue(6);
+         tree.addValue(7);
+         System.out.println(tree.traverse(Order.INORDER));
+         System.out.println(tree.traverse(Order.POSTORDER));
+         System.out.println(tree.traverse(Order.PREORDER));
+         System.out.println(tree.traverse(Order.LEVELORDER));
+         System.out.println(tree.getDepth());
+         System.out.println(tree.hasValue(10));**/
         System.out.println(tree.traverse(Order.PREORDER));
         //tree.rotate_right(tree.root);
         System.out.println(tree.traverse(Order.LEVELORDER));
