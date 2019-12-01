@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -101,15 +102,33 @@ public class RedBlackTreeController implements Initializable {
                 }
                 textFInSearch.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));
-            }catch ( NumberFormatException ex) {
+            } catch (NumberFormatException ex) {
                 errorMessage(ex.getMessage());
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 errorMessage(ex.getMessage());
             }
 
         });
         btnDepth.setOnAction(e -> {
             depth.setText(String.valueOf(tree.getDepth()));
+        });
+        btnDepth.setOnAction(e -> {
+            depth.setText(String.valueOf(tree.getDepth()));
+        });
+        textFInSearch.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                btnSearch.fire();
+            }
+        });
+        textFInAdd.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                btnAdd.fire();
+            }
+        });
+        textFInDelete.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                btnDelete.fire();
+            }
         });
         this.imageView.setImage(setImg(tree.toGraphiz()));
     }
