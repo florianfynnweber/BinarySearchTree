@@ -97,11 +97,13 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     private void insert_case4(RBNode node) {
         if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getLeft())) {
             // rotate with parent
-            System.out.println("routate left");
+            this.rotate_left(node.getParent());
+            //System.out.println("routate left");
             node = node.getLeft();
         } else if ((node == node.getParent().getLeft()) && (node.getParent() == node.getParent().getParent().getRight())) {
             //rotate with parent
-            System.out.println("rotate right");
+            this.rotate_right(node.getParent());
+            // System.out.println("rotate right");
             node = node.getRight();
         }
         insert_Case5(node);
@@ -110,10 +112,12 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     private void insert_Case5(RBNode node) {
         if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getLeft())) {
             // rotate with grandparent
-            System.out.println("rotate right");
+            this.rotate_right(node.getParent().getParent());
+            // System.out.println("rotate right");
         } else if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getRight())) {
             // rotate with grandparent
-            System.out.println("rotate left");
+            this.rotate_left(node.getParent().getParent());
+            // System.out.println("rotate left");
             node.getParent().setColor(BLACK);
             node.getParent().getParent().setColor(RED);
         }
