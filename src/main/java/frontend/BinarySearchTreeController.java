@@ -27,7 +27,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class BinarySearchTreeController implements Initializable {
-    static BufferedImage gr;
+    @FXML
+    public Label resultSearch;
+    @FXML
+    public Button btnDepth;
     BinarySearchTree tree = new BinarySearchTree();
     @FXML
     public TextField textFIn;
@@ -67,7 +70,7 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnAdd.setOnAction(e ->{
             try {
-                tree.addValue(textFIn.getText());
+                tree.addValue(Integer.parseInt(textFIn.getText()));
                 System.out.println(tree.traverse(Order.INORDER));
                 textFIn.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox prefHeight="600.0" prefWidth="900.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.BinarySearchTreeController">
+   <children>
+       <SplitPane dividerPositions="0.5" focusTraversable="true" VBox.vgrow="ALWAYS">
+           <items>
+               <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                   <content>
+                       <AnchorPane>
+                           <children>
+                               <TextField fx:id="textFInAdd" layoutX="116.0" layoutY="160.0" prefHeight="25.0" prefWidth="119.0" />
+                               <Label layoutX="18.0" layoutY="164.0" text="Insert Value:" textAlignment="RIGHT" />
+                               <Button fx:id="btnAdd" layoutX="245.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Insert" />
+                               <Label layoutX="13.0" layoutY="201.0" text="Delete Value:" textAlignment="RIGHT" />
+                               <TextField fx:id="textFInDelete" layoutX="116.0" layoutY="197.0" prefHeight="25.0" prefWidth="119.0" />
+                               <Button fx:id="btnDelete" layoutX="245.0" layoutY="197.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Delete" />
+                               <Label layoutX="11.0" layoutY="240.0" text="Search Value:" textAlignment="RIGHT" />
+                               <TextField fx:id="textFInSearch" layoutX="116.0" layoutY="236.0" prefHeight="25.0" prefWidth="119.0" />
+                               <Button fx:id="btnSearch" layoutX="245.0" layoutY="236.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Search" />
+                               <Label layoutX="13.0" layoutY="423.0" text="Do you want a RB-Tree?" textFill="#bcbcbc">
+                                   <font>
+                                       <Font size="16.0" />
+                                   </font>
+                               </Label>
+                               <Label fx:id="resultSearch" layoutX="116.0" layoutY="282.0" prefHeight="20.0" prefWidth="170.0">
+                                   <font>
+                                       <Font size="14.0" />
+                                   </font>
+                               </Label>
+                               <Button fx:id="btnDepth" layoutX="11.0" layoutY="279.0" mnemonicParsing="false" text="Get Depth" />
+                               <Label layoutX="11.0" layoutY="41.0" text="Binary Search Tree">
+                                   <font>
+                                       <Font name="System Bold" size="25.0" />
+                                   </font>
+                               </Label>
+                               <ComboBox fx:id="transverseBox" layoutX="14.0" layoutY="325.0" prefWidth="150.0" styleClass="split-menu-btn-primary" />
+                               <Label fx:id="transverseResult" layoutX="209.0" layoutY="305.0" text="Label" />
+                           </children>
+                       </AnchorPane>
+                   </content>
+               </ScrollPane>
+               <ScrollPane prefHeight="278.0" prefWidth="464.0">
+                   <content>
+                       <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+                           <children>
+                               <ImageView fx:id="imageView" fitHeight="480.0" fitWidth="427.0" layoutX="14.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                       </AnchorPane>
+                   </content>
+               </ScrollPane>
+           </items>
+       </SplitPane>
+   </children>
+
+</VBox>
