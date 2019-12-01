@@ -3,9 +3,14 @@ package backend;
 import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.attribute.RankDir;
 import guru.nidi.graphviz.attribute.Style;
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.Factory;
 import guru.nidi.graphviz.model.Graph;
+import guru.nidi.graphviz.model.MutableGraph;
+import guru.nidi.graphviz.parse.Parser;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +21,9 @@ import static guru.nidi.graphviz.model.Factory.node;
 public class BinarySearchTree implements InterfaceBinarySearchTree {
     BNode root;
     ArrayList ordered;
+    private StringBuilder treeDot = new StringBuilder();
+    private MutableGraph mGraph;
+    private int count;
 
     public BinarySearchTree() {
         root = null;
@@ -215,15 +223,45 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
-    public Graph toGraphiz() throws IOException {
-        Graph g = graph("example1").directed()
-                .graphAttr().with(RankDir.TOP_TO_BOTTOM, Color.rgba("00000000").background())
-                .with(
-                        node("a").with(Color.RED).link(node("b")).link(node("er")),
-                        node("b").link(Factory.to(node("c")).with(Style.DASHED)),
-                        node("er").with(Color.GREEN)
-                );
-        return g;
+    public File toGraphiz() throws IOException {
+        this.treeDot.setLength(0);
+        this.treeDot.append("diagraph BST {");
+        this.graphvizTree(this.root);
+        this.treeDot.append("}");
+        this.count = 0;
+        try {
+            this.mGraph = Parser.read(treeDot.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            return Graphviz.fromGraph(this.mGraph).render(Format.PNG).toFile(new File("./src/main/resources/images/tempGraph.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private void graphvizTree(BNode root) {
+        if (root != null){
+            this.treeDot.append(root.toString()).append("[label=").append(root.toString()).append("];");
+            if (root.getLeft() == null) {
+                this.treeDot.append(root.toString()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
+                this.count++;
+            } else {
+                this.treeDot.append(root.toString()).append("-> ").append(root.getLeft()).append("; ");
+                graphvizTree(root.getLeft());
+            }
+
+            if (root.getRight() == null) {
+                this.treeDot.append(root.toString()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
+                this.count++;
+            } else {
+                this.treeDot.append(root.toString()).append("-> ").append(root.getRight()).append("; ");
+                graphvizTree(root.getRight());
+            }
+        }
     }
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {
