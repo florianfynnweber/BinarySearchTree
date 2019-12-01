@@ -59,13 +59,6 @@
             <version>1.24.1</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>jcenter</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>
