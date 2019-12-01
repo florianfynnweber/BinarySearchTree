@@ -66,10 +66,8 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
                 node.setUncle(null);
             } else if (parent.getRight() != null) {
                 node.setUncle(parent.getRight());
-                System.out.println("my right uncle is" + node.getUncle().getValue());
             } else if (parent.getLeft() != null) {
                 node.setUncle(parent.getLeft());
-                System.out.println("my left uncle is" + node.getUncle().getValue());
             }
         }
         return node;
@@ -107,7 +105,6 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
      */
     public void insert_case1(RBNode node) {
         if (node.getParent() == null) {
-            System.out.println("New Node is added as the root of the tree");
             node.setColor(BLACK);
         } else {
             insert_case2(node);
@@ -121,7 +118,6 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
      */
     public void insert_case2(RBNode node) {
         if (node.getParent().getColor() == BLACK) {
-            System.out.println("Parent of new node is black");
         } else {
             insert_case3(node);
         }
@@ -134,7 +130,6 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
      */
     public void insert_case3(RBNode node) {
         if ((node.getUncle() != null) && (node.getUncle().getColor() == RED)) {
-            System.out.println("Parent and uncle of new node are red");
             node.getParent().setColor(BLACK);
             node.getUncle().setColor(BLACK);
             node.getParent().getParent().setColor(RED);
