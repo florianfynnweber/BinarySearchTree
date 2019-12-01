@@ -257,6 +257,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
                 graphvizTree(root.getRight());
             }
         }
+        System.out.println(this.treeDot);
     }
 
     public static void main(String[] args) throws BinarySearchTreeException, IOException {
@@ -283,7 +284,6 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         System.out.println(tree.traverse(Order.PREORDER));
         System.out.println(tree.traverse(Order.LEVELORDER));
         System.out.println(tree.getDepth());
-        tree.toGraphiz();
     }
 
 

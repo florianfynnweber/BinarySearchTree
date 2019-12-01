@@ -3,6 +3,7 @@ package frontend;
 import backend.BinarySearchTree;
 import backend.BinarySearchTreeException;
 import backend.Order;
+import backend.RedBlackTree;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import javafx.collections.FXCollections;
@@ -36,7 +37,7 @@ public class BinarySearchTreeController implements Initializable {
     public TextField textFInSearch;
     @FXML
     public Label depth;
-    BinarySearchTree tree = new BinarySearchTree();
+    RedBlackTree tree = new RedBlackTree();
     @FXML
     public Button btnAdd;
     @FXML
