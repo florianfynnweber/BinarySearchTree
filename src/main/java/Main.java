@@ -23,7 +23,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // load fxml
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Binary search tree");
         showContent();
@@ -32,13 +31,11 @@ public class Main extends Application {
 
     public void showContent() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setController(con);
             //loader.setController(rbcontroller); // use to see a RedBlackTree
             loader.setLocation(Main.class.getResource("frontend/Gui2.fxml"));
             Parent personOverview = loader.load();
-            // Set person overview into the center of root layout.
             primaryStage.setScene(new Scene(personOverview));
             primaryStage.getScene().getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
             primaryStage.show();
