@@ -12,6 +12,25 @@
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.BinarySearchTreeController">
    <children>
+       <MenuBar BorderPane.alignment="CENTER">
+           <menus>
+               <Menu mnemonicParsing="false" text="File">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="Close" />
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" text="Edit">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="Delete" />
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" text="Help">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="About" />
+                   </items>
+               </Menu>
+           </menus>
+       </MenuBar>
        <SplitPane dividerPositions="0.5" focusTraversable="true" VBox.vgrow="ALWAYS">
            <items>
                <ScrollPane prefHeight="200.0" prefWidth="200.0">
@@ -39,8 +58,9 @@
                                    </font>
                                </Label>
                                <ComboBox fx:id="transverseBox" layoutX="74.0" layoutY="274.0" prefWidth="150.0" styleClass="split-menu-btn-primary" />
-                               <Label fx:id="transverseResult" layoutX="128.0" layoutY="322.0" text="Label" />
+                               <Label fx:id="transverseResult" layoutX="128.0" layoutY="322.0" />
                         <Label layoutX="18.0" layoutY="280.0" prefHeight="27.0" prefWidth="56.0" text="Order:" />
+                        <Label fx:id="depth" layoutX="142.0" layoutY="233.0" />
                            </children>
                        </AnchorPane>
                    </content>

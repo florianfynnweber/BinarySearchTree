@@ -37,6 +37,8 @@ public class BinarySearchTreeController implements Initializable {
     public TextField textFInDelete;
     @FXML
     public TextField textFInSearch;
+    @FXML
+    public Label depth;
     BinarySearchTree tree = new BinarySearchTree();
     @FXML
     public TextField textFIn;
@@ -98,6 +100,9 @@ public class BinarySearchTreeController implements Initializable {
             textFInSearch.setText("");
             this.imageView.setImage(setImg(tree.toGraphiz()));
 
+        });
+        btnDepth.setOnAction(e->{
+            depth.setText(String.valueOf(tree.getDepth()));
         });
         this.imageView.setImage(setImg(tree.toGraphiz()));
     }
