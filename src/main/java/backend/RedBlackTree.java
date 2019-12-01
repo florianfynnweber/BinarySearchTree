@@ -21,11 +21,24 @@ import static java.awt.Color.BLACK;
 import static java.awt.Color.RED;
 
 public class RedBlackTree implements InterfaceBinarySearchTree {
-    RBNode root;
+    /**
+     * root node of tree
+     */
+    RBNode<Integer> root;
+    /**
+     * include traverse results
+     */
     ArrayList ordered;
+    /**
+     * helpers for dot
+     */
     private StringBuilder treeDot = new StringBuilder();
     private MutableGraph mGraph;
     private int count;
+
+    /**
+     * Constructor
+     */
     public RedBlackTree() {
         root = null;
     }
@@ -39,7 +52,14 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         root = insertRec(root, value, null);
     }
 
-    // funcktioniert noch nicht
+
+    /**
+     * Should find the uncle, doesnt work now
+     *
+     * @param node   a node obj
+     * @param parent the parent of node
+     * @return uncle of node
+     */
     public RBNode findUncle(RBNode node, RBNode parent) {
         if (parent != null) {
             if (parent.getRight() == null && parent.getLeft() == null) {
@@ -55,6 +75,14 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         return node;
     }
 
+    /**
+     * Search for the right position in the tree
+     *
+     * @param tmp    current node
+     * @param value  value that should be added
+     * @param parent parent node of tmp
+     * @return added node
+     */
     public RBNode insertRec(RBNode tmp, Comparable value, RBNode parent) {
         if (tmp == null) {
             tmp = new RBNode(value, parent);
@@ -72,6 +100,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * First case adding a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     public void insert_case1(RBNode node) {
         if (node.getParent() == null) {
             System.out.println("New Node is added as the root of the tree");
@@ -81,6 +114,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Second case adding a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     public void insert_case2(RBNode node) {
         if (node.getParent().getColor() == BLACK) {
             System.out.println("Parent of new node is black");
@@ -89,6 +127,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Third case adding a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     public void insert_case3(RBNode node) {
         if ((node.getUncle() != null) && (node.getUncle().getColor() == RED)) {
             System.out.println("Parent and uncle of new node are red");
@@ -101,6 +144,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Fourth case adding a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void insert_case4(RBNode node) {
         if ((node == node.getParent().getRight()) && (node.getParent() == node.getParent().getParent().getLeft())) {
             // rotate with parent
@@ -116,6 +164,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         insert_Case5(node);
     }
 
+    /**
+     * Fifth case adding a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void insert_Case5(RBNode node) {
         if ((node == node.getParent().getLeft()) && (node.getParent() == node.getParent().getParent().getLeft())) {
             // rotate with grandparent
@@ -140,6 +193,13 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
 
     }
 
+    /**
+     * Search recursive in tree for the node that should deleted
+     *
+     * @param tmp current node
+     * @param key value of node that should be deleted
+     * @return reordered tree
+     */
     public RBNode delete(RBNode tmp, int key) {
 
         if (tmp == null) return tmp;
@@ -170,6 +230,10 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         return tmp;
     }
 
+    /**
+     * @param tmp a node
+     * @return lowest value of node obj
+     */
     public int minValue(AbstractNode tmp) {
         int minv = (int) tmp.getValue();
         while (tmp.getLeft() != null) {
@@ -179,6 +243,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         return minv;
     }
 
+    /**
+     * First case deleting a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void del_case1(RBNode node) {
         if (node.getParent() != null) {
             del_case2(node);
@@ -187,6 +256,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Second case deleting a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void del_case2(RBNode node) {
         if (node.getSibling().getColor() == RED) {
             if (node == node.getParent().getLeft()) {
@@ -200,6 +274,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         del_case3(node);
     }
 
+    /**
+     * Third case deleting a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void del_case3(RBNode node) {
         if ((node.getParent().getColor() == BLACK) && (node.getSibling().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor() == BLACK)) {
             node.getSibling().setColor(RED);
@@ -209,6 +288,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Fourth case deleting a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void del_case4(RBNode node) {
         if ((node.getParent().getColor() == RED) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor() == BLACK)) {
             node.getSibling().setColor(RED);
@@ -218,8 +302,13 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Fifth case deleting a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void del_case5(RBNode node) {
-        if (node.getSibling().getColor() == RED){
+        if (node.getSibling().getColor() == RED) {
             if ((node == node.getParent().getLeft()) && (node.getSibling().getRight().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == RED)) {
                 rotate_right(node.getSibling());
             } else if ((node == node.getParent().getRight()) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor() == RED)) {
@@ -231,6 +320,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         del_case6(node);
     }
 
+    /**
+     * Sixth case deleting a node to RedBlackTree
+     *
+     * @param node a node obj
+     */
     private void del_case6(RBNode node) {
         node.getSibling().setColor(node.getParent().getColor());
         if (node == node.getParent().getLeft()) {
@@ -242,6 +336,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Rotate left around the given node
+     *
+     * @param node a node obj
+     */
     private void rotate_left(RBNode node) {
         if (node.getParent() != null) {
             if (node == node.getParent().getLeft()) {
@@ -267,6 +366,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * Rotate right around the given node
+     *
+     * @param node a node obj
+     */
     private void rotate_right(RBNode node) {
         if (node.getParent() != null) {
             if (node == node.getParent().getLeft()) {
@@ -276,7 +380,7 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
             }
             node.getLeft().setParent(node.getParent());
             node.setParent(node.getLeft());
-            if (node.getLeft().getRight() != null){
+            if (node.getLeft().getRight() != null) {
                 node.getLeft().getRight().setParent(node);
             }
             node.setLeft(node.getLeft().getRight());
@@ -369,6 +473,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         return null;
     }
 
+    /**
+     * sorted tree by levelorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getLevelorder(AbstractNode node) {
         int h = depth(node);
         int i;
@@ -376,6 +485,12 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
             atGivenDepth(node, i);
     }
 
+    /**
+     * Helper for levelorder
+     *
+     * @param node a node obj
+     * @param i    level number
+     */
     private void atGivenDepth(AbstractNode node, int i) {
         if (node == null)
             return;
@@ -387,6 +502,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         }
     }
 
+    /**
+     * sorted tree by inorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getInorder(AbstractNode node) {
         if (node == null)
             return;
@@ -396,6 +516,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
 
     }
 
+    /**
+     * sorted tree by postorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getPostorder(AbstractNode node) {
         if (node == null)
             return;
@@ -404,6 +529,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         ordered.add(node.getValue());
     }
 
+    /**
+     * sorted tree by preorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getPreorder(AbstractNode node) {
         if (node == null)
             return;
@@ -412,6 +542,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
+    /**
+     * Returns the tree as a image
+     *
+     * @return Gives back a image file as png
+     */
     public File toGraphiz() {
         this.treeDot.setLength(0);
         this.treeDot.append("digraph BST {");
@@ -432,9 +567,14 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         return null;
     }
 
+    /**
+     * Translates the tree into dot notation
+     *
+     * @param root a node obj
+     */
     private void graphvizTree(RBNode root) {
-        if (root != null){
-            this.treeDot.append(root.getValue()).append("[label=").append(root.getValue()).append(",color="+((root.getColor() == RED)? "red" : "black")+",style=filled,fontcolor=white];");
+        if (root != null) {
+            this.treeDot.append(root.getValue()).append("[label=").append(root.getValue()).append(",color=" + ((root.getColor() == RED) ? "red" : "black") + ",style=filled,fontcolor=white];");
             if (root.getLeft() == null) {
                 this.treeDot.append(root.getValue()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
                 this.count++;
@@ -470,15 +610,6 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
         tree.addValue(3);
         tree.addValue(6);
         tree.addValue(1);
-        /**tree.addValue(2);
-         tree.addValue(6);
-         tree.addValue(7);
-         System.out.println(tree.traverse(Order.INORDER));
-         System.out.println(tree.traverse(Order.POSTORDER));
-         System.out.println(tree.traverse(Order.PREORDER));
-         System.out.println(tree.traverse(Order.LEVELORDER));
-         System.out.println(tree.getDepth());
-         System.out.println(tree.hasValue(10));**/
         System.out.println(tree.traverse(Order.PREORDER));
         //tree.rotate_right(tree.root);
         System.out.println(tree.traverse(Order.LEVELORDER));
