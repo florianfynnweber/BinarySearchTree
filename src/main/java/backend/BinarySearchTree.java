@@ -14,12 +14,24 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 
 public class BinarySearchTree implements InterfaceBinarySearchTree {
+    /**
+     * root node of tree
+     */
     BNode<Integer> root;
+    /**
+     * include traverse results
+     */
     ArrayList ordered;
+    /**
+     * helpers for dot
+     */
     private StringBuilder treeDot = new StringBuilder();
     private MutableGraph mGraph;
     private int count;
 
+    /**
+     * Constructor
+     */
     public BinarySearchTree() {
         root = null;
     }
@@ -33,6 +45,14 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         root = insertRec(root, value);
     }
 
+
+    /**
+     * Search for the right position in the tree
+     *
+     * @param tmp   current node
+     * @param value value that should be added
+     * @return added node
+     */
     public BNode insertRec(BNode tmp, Comparable value) {
         if (tmp == null) {
             tmp = new BNode(value);
@@ -49,17 +69,23 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
     }
 
 
-
     /**
      * Delete a Node to the tree
      *
-     * @param value The Node obj that should be delete
+     * @param value The value of a Node obj that should be delete
      */
     public void delValue(Comparable value) throws BinarySearchTreeException {
         root = delete(root, (int) value);
 
     }
 
+    /**
+     * Search recursive in tree for the node that should deleted
+     *
+     * @param tmp current node
+     * @param key value of node that should be deleted
+     * @return reordered tree
+     */
     public BNode delete(BNode tmp, int key) {
 
         if (tmp == null) return tmp;
@@ -69,9 +95,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
             tmp.setLeft(delete(tmp.getLeft(), key));
         else if (key > (int) tmp.getValue())
             tmp.setRight(delete(tmp.getRight(), key));
-
-            // if key is same as tmp's key, then This is the node
-            // to be deleted
+            // if key is same as tmp's key, then this is the node to be deleted
         else {
             // node with only one child or no child
             if (tmp.getLeft() == null)
@@ -90,6 +114,10 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return tmp;
     }
 
+    /**
+     * @param tmp a node
+     * @return lowest value of node obj
+     */
     public int minValue(AbstractNode tmp) {
         int minv = (int) tmp.getValue();
         while (tmp.getLeft() != null) {
@@ -139,15 +167,15 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return depth(root);
     }
 
-    public int depth(AbstractNode root){
-        if (root==null){
+    public int depth(AbstractNode root) {
+        if (root == null) {
             return 0;
-        }else {
+        } else {
             int lheight = depth(root.getLeft());
             int rheight = depth(root.getRight());
             if (lheight > rheight)
-                return(lheight+1);
-            else return(rheight+1);
+                return (lheight + 1);
+            else return (rheight + 1);
         }
     }
 
@@ -175,24 +203,40 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         }
         return null;
     }
-    public void getLevelorder(AbstractNode node){
+
+    /**
+     * sorted tree by levelorder
+     *
+     * @param node a node obj (mostly root)
+     */
+    public void getLevelorder(AbstractNode node) {
         int h = depth(node);
         int i;
-        for (i=1; i<=h; i++)
+        for (i = 1; i <= h; i++)
             atGivenDepth(node, i);
     }
 
+    /**
+     * Helper for levelorder
+     *
+     * @param node a node obj
+     * @param i level number
+     */
     private void atGivenDepth(AbstractNode node, int i) {
         if (node == null)
             return;
-        if (i == 1){
+        if (i == 1) {
             ordered.add(node.getValue());
-        }else if (i>1) {
-            atGivenDepth(node.getLeft(), i-1);
-            atGivenDepth(node.getRight(), i-1);
+        } else if (i > 1) {
+            atGivenDepth(node.getLeft(), i - 1);
+            atGivenDepth(node.getRight(), i - 1);
         }
     }
-
+    /**
+     * sorted tree by inorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getInorder(AbstractNode node) {
         if (node == null)
             return;
@@ -201,7 +245,11 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getInorder(node.getRight());
 
     }
-
+    /**
+     * sorted tree by postorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getPostorder(AbstractNode node) {
         if (node == null)
             return;
@@ -209,7 +257,11 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getInorder(node.getRight());
         ordered.add(node.getValue());
     }
-
+    /**
+     * sorted tree by preorder
+     *
+     * @param node a node obj (mostly root)
+     */
     public void getPreorder(AbstractNode node) {
         if (node == null)
             return;
@@ -218,6 +270,10 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
+    /**
+     * Returns the tree as a image
+     * @return Gives back a image file as png
+     */
     public File toGraphiz() {
         this.treeDot.setLength(0);
         this.treeDot.append("digraph BST {");
@@ -238,8 +294,13 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         return null;
     }
 
+    /**
+     * Translates the tree into dot notation
+     *
+     * @param root a node obj
+     */
     private void graphvizTree(BNode root) {
-        if (root != null){
+        if (root != null) {
             this.treeDot.append(root.getValue()).append("[label=").append(root.getValue()).append("];");
             if (root.getLeft() == null) {
                 this.treeDot.append(root.getValue()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
