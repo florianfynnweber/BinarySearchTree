@@ -1,12 +1,7 @@
 package backend;
 
-import guru.nidi.graphviz.attribute.Color;
-import guru.nidi.graphviz.attribute.RankDir;
-import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
-import guru.nidi.graphviz.model.Factory;
-import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.MutableGraph;
 import guru.nidi.graphviz.parse.Parser;
 
@@ -19,7 +14,7 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 
 public class BinarySearchTree implements InterfaceBinarySearchTree {
-    BNode root;
+    BNode<Integer> root;
     ArrayList ordered;
     private StringBuilder treeDot = new StringBuilder();
     private MutableGraph mGraph;
@@ -223,9 +218,9 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         getPreorder(node.getRight());
     }
 
-    public File toGraphiz() throws IOException {
+    public File toGraphiz() {
         this.treeDot.setLength(0);
-        this.treeDot.append("diagraph BST {");
+        this.treeDot.append("digraph BST {");
         this.graphvizTree(this.root);
         this.treeDot.append("}");
         this.count = 0;
@@ -245,20 +240,20 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
 
     private void graphvizTree(BNode root) {
         if (root != null){
-            this.treeDot.append(root.toString()).append("[label=").append(root.toString()).append("];");
+            this.treeDot.append(root.getValue()).append("[label=").append(root.getValue()).append("];");
             if (root.getLeft() == null) {
-                this.treeDot.append(root.toString()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
+                this.treeDot.append(root.getValue()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
                 this.count++;
             } else {
-                this.treeDot.append(root.toString()).append("-> ").append(root.getLeft()).append("; ");
+                this.treeDot.append(root.getValue()).append("-> ").append(root.getLeft().getValue()).append("; ");
                 graphvizTree(root.getLeft());
             }
 
             if (root.getRight() == null) {
-                this.treeDot.append(root.toString()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
+                this.treeDot.append(root.getValue()).append("-> null").append(this.count).append("; null").append(this.count).append(" [shape=point];");
                 this.count++;
             } else {
-                this.treeDot.append(root.toString()).append("-> ").append(root.getRight()).append("; ");
+                this.treeDot.append(root.getValue()).append("-> ").append(root.getRight().getValue()).append("; ");
                 graphvizTree(root.getRight());
             }
         }
@@ -282,11 +277,13 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         tree.addValue(2);
         tree.addValue(6);
         tree.addValue(7);
+        System.out.println(tree.root.getRight().getValue());
         System.out.println(tree.traverse(Order.INORDER));
         System.out.println(tree.traverse(Order.POSTORDER));
         System.out.println(tree.traverse(Order.PREORDER));
         System.out.println(tree.traverse(Order.LEVELORDER));
         System.out.println(tree.getDepth());
+        tree.toGraphiz();
     }
 
 

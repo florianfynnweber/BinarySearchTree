@@ -20,7 +20,7 @@ public class Main extends Application {
         // load fxml
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Binary search tree");
-        //setRootLayout();
+        setRootLayout();
         showContent();
     }
 

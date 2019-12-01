@@ -1,66 +1,52 @@
-package frontend; /**
- * JavaFx Controller for Binary Search Tree
- *
- * @author Falko Tschernay
- * @author Joel Pitzler
- * @version 1.0, 10.11.2019
- */
-
-
+package frontend;
 
 import backend.BinarySearchTree;
 import backend.BinarySearchTreeException;
+import backend.Order;
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BinarySearchTreeController implements Initializable {
+    static BufferedImage gr;
+    BinarySearchTree tree = new BinarySearchTree();
     @FXML
-    private TextField tf_insert_value;
+    public TextField textFIn;
     @FXML
-    private TextField tf_delete_value;
+    public Button btnAdd;
     @FXML
-    private TextField tf_search_value;
+    public Button btnDelete;
     @FXML
-    private Label lb_searchAnswer;
+    public Button btnSearch;
     @FXML
-    private Button b_rbtree;
+    public Label failureView;
     @FXML
-    private Button b_go_insert;
+    public ImageView imageView;
     @FXML
-    private Button b_go_delete;
+    public ComboBox transverseBox;
     @FXML
-    private Button b_go_search;
-    @FXML
-    private Button b_depth;
-    @FXML
-    private ImageView img_tree_display;
-    @FXML
-    private ChoiceBox cb_datatype_select;
-    @FXML
-    private VBox vb;
+    public Label transverseResult;
 
-    private static String integer = "Integer";
-    private static String string = "String";
-
-    /*Creates an oblect of the BinarySearchTree class to provide functionality.*/
-    private BinarySearchTree treeInteger = new BinarySearchTree();
-    private BinarySearchTree treeString = new BinarySearchTree();
     private Image imgTmp;
-
-    /*Reads out File input for the ImageView to display the treeInteger*/
     private Image setImg(File src) {
         try {
             imgTmp = new Image(new FileInputStream(src));
@@ -70,127 +56,38 @@ public class BinarySearchTreeController implements Initializable {
         return imgTmp;
     }
 
-
-    /**
-     * Initialize the functionality of the GUI
-     *
-     * @param url            to create Url objects.
-     * @param resourceBundle to create a localization.
-     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        refresh();
+        transverseBox.setItems(FXCollections.observableList(Arrays.asList(Order.values())));
+        transverseBox.getSelectionModel().select(Order.INORDER);
+        transverseBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            List result = tree.traverse((Order) transverseBox.getValue());
+            transverseResult.setText(result.toString());
+            this.imageView.setImage(setImg(tree.toGraphiz()));
+        });
+        btnAdd.setOnAction(e ->{
+            try {
+                tree.addValue(textFIn.getText());
+                System.out.println(tree.traverse(Order.INORDER));
+                textFIn.setText("");
+                this.imageView.setImage(setImg(tree.toGraphiz()));
+            } catch (BinarySearchTreeException ex) {
+                ex.printStackTrace();
+            }
+        });
+        btnDelete.setOnAction(e ->{
+            try {
+                tree.delValue(textFIn.getText());
+                this.imageView.setImage(setImg(tree.toGraphiz()));
+            } catch (BinarySearchTreeException ex) {
+                ex.printStackTrace();
+            }
+        });
+        btnSearch.setOnAction(e -> {
+            tree.hasValue(textFIn.getText());
+            this.imageView.setImage(setImg(tree.toGraphiz()));
+
+        });
+        this.imageView.setImage(setImg(tree.toGraphiz()));
     }
-
-    /**
-     * Displays an Error message.
-     *
-     * @param message The error message to display.
-     */
-    private void showErrorMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    /**
-     * Starts the functionality of the GUI.
-     */
-    private void refresh() {
-        b_depth.setOnAction(e -> {
-            if (cb_datatype_select.getValue() == integer) {
-                lb_searchAnswer.setText("Depth of tree is:" + treeInteger.getDepth());
-            } else {
-                lb_searchAnswer.setText("Depth of tree is:" + treeString.getDepth());
-            }
-        });
-
-        b_go_insert.setOnAction(e -> {
-            if (cb_datatype_select.getValue() == integer) {
-                try {
-                    try {
-                        treeInteger.addValue(Integer.parseInt(tf_insert_value.getText()));
-                    } catch (IllegalArgumentException em) {
-                        showErrorMessage(em.getMessage());
-                    }
-                } catch (BinarySearchTreeException ex) {
-                    showErrorMessage(ex.getMessage());
-                }
-                try {
-                    img_tree_display.setImage(setImg(treeInteger.toGraphiz()));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            } else {
-                try {
-                    treeString.addValue(tf_insert_value.getText());
-                } catch (BinarySearchTreeException ex) {
-                    showErrorMessage(ex.getMessage());
-                }
-                try {
-                    img_tree_display.setImage(setImg(treeString.toGraphiz()));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-
-        });
-        b_go_delete.setOnAction(e -> {
-            if (cb_datatype_select.getValue() == integer) {
-                try {
-                    try {
-                        treeInteger.delValue(Integer.parseInt(tf_delete_value.getText()));
-                    } catch (IllegalArgumentException ed) {
-                        showErrorMessage(ed.getMessage());
-                    }
-                } catch (BinarySearchTreeException ef) {
-                    showErrorMessage(ef.getMessage());
-                }
-                try {
-                    img_tree_display.setImage(setImg(treeInteger.toGraphiz()));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            } else {
-                try {
-                    treeString.delValue(tf_delete_value.getText());
-                } catch (BinarySearchTreeException ef) {
-                    showErrorMessage(ef.getMessage());
-                }
-                try {
-                    img_tree_display.setImage(setImg(treeString.toGraphiz()));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-        b_go_search.setOnAction(e -> {
-            if (cb_datatype_select.getValue() == integer) {
-                try {
-                    if (treeInteger.hasValue(Integer.parseInt(tf_search_value.getText()))) {
-                        lb_searchAnswer.setText("Tree has value:" + tf_search_value.getText());
-                    } else {
-                        lb_searchAnswer.setText("Tree has not value" + tf_search_value.getText());
-                    }
-                } catch (IllegalArgumentException ie) {
-                    showErrorMessage(ie.getMessage());
-                }
-            } else {
-                if (treeString.hasValue(tf_search_value.getText())) {
-                    lb_searchAnswer.setText("Tree has value:" + tf_search_value.getText());
-                } else {
-                    lb_searchAnswer.setText("Tree has not value:" + tf_search_value.getText());
-                }
-            }
-        });
-        ObservableList<String> dataTypeList = FXCollections.observableArrayList(string, integer);
-        cb_datatype_select.setItems(dataTypeList);
-        cb_datatype_select.setValue(integer);
-    }
-
-
 }
-
-
