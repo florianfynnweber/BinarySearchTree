@@ -51,6 +51,7 @@ public class BinarySearchTreeController implements Initializable {
     public Label transverseResult;
 
     private Image imgTmp;
+
     private Image setImg(File src) {
         try {
             imgTmp = new Image(new FileInputStream(src));
@@ -60,11 +61,12 @@ public class BinarySearchTreeController implements Initializable {
         return imgTmp;
     }
 
-    private void errorMessage(String msg){
+    private void errorMessage(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         transverseBox.setItems(FXCollections.observableList(Arrays.asList(Order.values())));
@@ -74,39 +76,44 @@ public class BinarySearchTreeController implements Initializable {
             transverseResult.setText(result.toString());
             this.imageView.setImage(setImg(tree.toGraphiz()));
         });
-        btnAdd.setOnAction(e ->{
+        btnAdd.setOnAction(e -> {
             try {
                 tree.addValue(Integer.parseInt(textFInAdd.getText()));
                 System.out.println(tree.traverse(Order.INORDER));
                 textFInAdd.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));
-            } catch (BinarySearchTreeException ex) {
-                ex.printStackTrace();
+            } catch (BinarySearchTreeException | NumberFormatException ex) {
+                errorMessage(ex.getMessage());
             }
         });
-        btnDelete.setOnAction(e ->{
+        btnDelete.setOnAction(e -> {
             try {
                 tree.delValue(Integer.parseInt(textFInDelete.getText()));
                 textFInDelete.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));
-            } catch (BinarySearchTreeException ex) {
-                ex.printStackTrace();
+            } catch (BinarySearchTreeException | NumberFormatException ex) {
+                errorMessage(ex.getMessage());
             }
         });
         btnSearch.setOnAction(e -> {
-            System.out.println(tree.hasValue(Integer.parseInt(textFInSearch.getText())));
-            if (tree.hasValue(Integer.parseInt(textFInSearch.getText()))){
-                resultSearch.setText("200");
-                resultSearch.getStyleClass().add("text-success");
-            }else{
-                resultSearch.setText("404");
-                resultSearch.getStyleClass().add("text-danger");
+            try {
+                if (tree.hasValue(Integer.parseInt(textFInSearch.getText()))) {
+                    resultSearch.setText("200");
+                    resultSearch.getStyleClass().add("text-success");
+                } else {
+                    resultSearch.setText("404");
+                    resultSearch.getStyleClass().add("text-danger");
+                }
+                textFInSearch.setText("");
+                this.imageView.setImage(setImg(tree.toGraphiz()));
+            }catch ( NumberFormatException ex) {
+                errorMessage(ex.getMessage());
+            } catch (Exception ex){
+                errorMessage(ex.getMessage());
             }
-            textFInSearch.setText("");
-            this.imageView.setImage(setImg(tree.toGraphiz()));
 
         });
-        btnDepth.setOnAction(e->{
+        btnDepth.setOnAction(e -> {
             depth.setText(String.valueOf(tree.getDepth()));
         });
         this.imageView.setImage(setImg(tree.toGraphiz()));
