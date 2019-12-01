@@ -31,6 +31,12 @@ public class BinarySearchTreeController implements Initializable {
     public Label resultSearch;
     @FXML
     public Button btnDepth;
+    @FXML
+    public TextField textFInAdd;
+    @FXML
+    public TextField textFInDelete;
+    @FXML
+    public TextField textFInSearch;
     BinarySearchTree tree = new BinarySearchTree();
     @FXML
     public TextField textFIn;
@@ -70,9 +76,9 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnAdd.setOnAction(e ->{
             try {
-                tree.addValue(Integer.parseInt(textFIn.getText()));
+                tree.addValue(Integer.parseInt(textFInAdd.getText()));
                 System.out.println(tree.traverse(Order.INORDER));
-                textFIn.setText("");
+                textFInAdd.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
@@ -80,14 +86,16 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnDelete.setOnAction(e ->{
             try {
-                tree.delValue(textFIn.getText());
+                tree.delValue(Integer.parseInt(textFInDelete.getText()));
+                textFInDelete.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));
             } catch (BinarySearchTreeException ex) {
                 ex.printStackTrace();
             }
         });
         btnSearch.setOnAction(e -> {
-            tree.hasValue(textFIn.getText());
+            tree.hasValue(Integer.parseInt(textFInSearch.getText()));
+            textFInSearch.setText("");
             this.imageView.setImage(setImg(tree.toGraphiz()));
 
         });
