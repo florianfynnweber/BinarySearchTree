@@ -212,12 +212,14 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
     }
 
     private void del_case5(RBNode node) {
-        if ((node == node.getLeft()) && (node.getSibling().getRight().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == RED)) {
-            rotate_right(node.getSibling());
-        } else if ((node == node.getParent().getRight()) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor() == RED)) {
-            rotate_left(node.getSibling());
-            node.getSibling().setColor(RED);
-            node.getSibling().getRight().setColor(BLACK);
+        if (node.getSibling().getColor() == RED){
+            if ((node == node.getParent().getLeft()) && (node.getSibling().getRight().getColor() == BLACK) && (node.getSibling().getLeft().getColor() == RED)) {
+                rotate_right(node.getSibling());
+            } else if ((node == node.getParent().getRight()) && (node.getSibling().getLeft().getColor() == BLACK) && (node.getSibling().getRight().getColor() == RED)) {
+                rotate_left(node.getSibling());
+                node.getSibling().setColor(RED);
+                node.getSibling().getRight().setColor(BLACK);
+            }
         }
         del_case6(node);
     }
@@ -267,6 +269,11 @@ public class RedBlackTree implements InterfaceBinarySearchTree {
             }
             node.getLeft().setParent(node.getParent());
             node.setParent(node.getLeft());
+            if (node.getLeft().getRight() != null){
+                node.getLeft().getRight().setParent(node);
+            }
+            node.setLeft(node.getLeft().getRight());
+            node.getParent().setRight(node);
         } else {
             RBNode left = root.getLeft();
             root.setLeft(root.getLeft().getRight());
