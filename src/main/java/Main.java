@@ -1,3 +1,6 @@
+import backend.BinarySearchTree;
+import frontend.BinarySearchTreeController;
+import frontend.RedBlackTreeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +15,8 @@ import java.io.IOException;
 public class Main extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-
+    private RedBlackTreeController rbcontroller = new RedBlackTreeController();
+    private BinarySearchTreeController con = new BinarySearchTreeController();
     public static void main(String[] args) {
         launch(args);
     }
@@ -30,6 +34,8 @@ public class Main extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
+            loader.setController(con);
+            //loader.setController(rbcontroller); // use to see a RedBlackTree
             loader.setLocation(Main.class.getResource("frontend/Gui2.fxml"));
             Parent personOverview = loader.load();
             // Set person overview into the center of root layout.
