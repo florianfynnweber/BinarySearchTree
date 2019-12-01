@@ -24,6 +24,12 @@ import java.util.ResourceBundle;
 
 public class BinarySearchTreeController implements Initializable {
     static BufferedImage gr;
+    @FXML
+    public TextField tf_insert;
+    @FXML
+    public TextField tf_delete;
+    @FXML
+    public TextField tf_search;
     BinarySearchTree tree = new BinarySearchTree();
     @FXML
     public TextField textFIn;
@@ -45,12 +51,12 @@ public class BinarySearchTreeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        transverseBox.setItems(FXCollections.observableList(Arrays.asList(Order.values())));
-        transverseBox.getSelectionModel().select(Order.INORDER);
-        transverseBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            List result = tree.traverse((Order) transverseBox.getValue());
-            transverseResult.setText(result.toString());
-        });
+        //transverseBox.setItems(FXCollections.observableList(Arrays.asList(Order.values())));
+        //transverseBox.getSelectionModel().select(Order.INORDER);
+        //transverseBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+         //   List result = tree.traverse((Order) transverseBox.getValue());
+          //  transverseResult.setText(result.toString());
+        //});
         btnAdd.setOnAction(e -> {
             try {
                 tree.addValue(Integer.parseInt(textFIn.getText()));

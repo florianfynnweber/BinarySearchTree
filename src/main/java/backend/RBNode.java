@@ -12,6 +12,9 @@ import java.awt.Color;
 public class RBNode<T extends Comparable<T>> extends AbstractNode implements Comparable {
     private RBNode left = null;
     private RBNode right = null;
+    private RBNode parent = null;
+    private RBNode uncle = null;
+    private RBNode sibling = null;
     private T value = null;
     private Color color = Color.RED;
 
@@ -21,6 +24,11 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode implements Com
 
     RBNode(T value) {
         this.value = value;
+    }
+
+    RBNode(T value, RBNode parent){
+        this.value = value;
+        this.parent = parent;
     }
 
     public RBNode getLeft() {
@@ -60,5 +68,36 @@ public class RBNode<T extends Comparable<T>> extends AbstractNode implements Com
     public int compareTo(Object o) {
         RBNode<T> other = (RBNode<T>) o;
         return this.getValue().compareTo(other.getValue());
+    }
+
+    public RBNode getParent() {
+        return parent;
+    }
+
+    public void setParent(RBNode parent) {
+        this.parent = parent;
+    }
+
+    public RBNode getUncle() {
+        if (this.getParent() != null && this.getParent().getParent() != null){
+            if (this.getParent().getParent().getLeft() == this.getParent()){
+                return this.getParent().getParent().getRight();
+            }else {
+                return this.getParent().getParent().getLeft();
+            }
+        }
+        return uncle;
+    }
+
+    public void setUncle(RBNode uncle) {
+        this.uncle = uncle;
+    }
+
+    public RBNode getSibling() {
+        return sibling;
+    }
+
+    public void setSibling(RBNode sibling) {
+        this.sibling = sibling;
     }
 }
