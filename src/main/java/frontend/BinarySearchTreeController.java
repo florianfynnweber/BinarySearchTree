@@ -41,15 +41,11 @@ public class BinarySearchTreeController implements Initializable {
     public Label depth;
     BinarySearchTree tree = new BinarySearchTree();
     @FXML
-    public TextField textFIn;
-    @FXML
     public Button btnAdd;
     @FXML
     public Button btnDelete;
     @FXML
     public Button btnSearch;
-    @FXML
-    public Label failureView;
     @FXML
     public ImageView imageView;
     @FXML
@@ -97,6 +93,13 @@ public class BinarySearchTreeController implements Initializable {
         });
         btnSearch.setOnAction(e -> {
             System.out.println(tree.hasValue(Integer.parseInt(textFInSearch.getText())));
+            if (tree.hasValue(Integer.parseInt(textFInSearch.getText()))){
+                resultSearch.setText("200");
+                resultSearch.getStyleClass().add("text-success");
+            }else{
+                resultSearch.setText("404");
+                resultSearch.getStyleClass().add("text-danger");
+            }
             textFInSearch.setText("");
             this.imageView.setImage(setImg(tree.toGraphiz()));
 
