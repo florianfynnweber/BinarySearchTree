@@ -80,7 +80,6 @@ public class BinarySearchTreeController implements Initializable {
         btnAdd.setOnAction(e -> {
             try {
                 tree.addValue(Integer.parseInt(textFInAdd.getText()));
-                System.out.println(tree.traverse(Order.INORDER));
                 textFInAdd.setText("");
                 this.imageView.setImage(setImg(tree.toGraphiz()));
             } catch (BinarySearchTreeException | NumberFormatException ex) {
