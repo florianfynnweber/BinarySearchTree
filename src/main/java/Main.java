@@ -34,6 +34,7 @@ public class Main extends Application {
             Parent personOverview = loader.load();
             // Set person overview into the center of root layout.
             primaryStage.setScene(new Scene(personOverview));
+            primaryStage.getScene().getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

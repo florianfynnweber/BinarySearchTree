@@ -96,7 +96,7 @@ public class BinarySearchTreeController implements Initializable {
             }
         });
         btnSearch.setOnAction(e -> {
-            tree.hasValue(Integer.parseInt(textFInSearch.getText()));
+            System.out.println(tree.hasValue(Integer.parseInt(textFInSearch.getText())));
             textFInSearch.setText("");
             this.imageView.setImage(setImg(tree.toGraphiz()));
 
