@@ -283,6 +283,7 @@ public class BinarySearchTree implements InterfaceBinarySearchTree {
         System.out.println(tree.traverse(Order.PREORDER));
         System.out.println(tree.traverse(Order.LEVELORDER));
         System.out.println(tree.getDepth());
+        tree.toGraphiz();
     }
 
 
