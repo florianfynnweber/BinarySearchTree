@@ -1,5 +1,5 @@
 # BinarySearchTree
-Hi I'm here
+Hi I'm here to
 setup javafx
 1) create new configuration
 2) choose maven as configuration
